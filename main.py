@@ -7,10 +7,28 @@
   by the user.
 """
 
+import argparse
+
+
+def options_parser():
+    """
+        Parse the command line options. Return the an object containing all
+        the options and their value
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--test", dest="test", action="store_true",
+                        help="Start all the unit-test of the project")
+
+    return parser.parse_args()
+
 
 def main():
     """ main du programme """
     print("PySMAnalyzer programmed with love by cutty853")
+    options = options_parser()
+    if options.test:
+        # import test
+        print("Loading all the unit-test of the project")
 
 
 if __name__ == "__main__":
