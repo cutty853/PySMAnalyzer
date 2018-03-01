@@ -1,3 +1,8 @@
+# Specific project ignore
+Calibreuse_output.xml
+Calibreuse.xml
+output_sample.xml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

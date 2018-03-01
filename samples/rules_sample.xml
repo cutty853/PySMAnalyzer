@@ -1,0 +1,67 @@
+<!-- 0: la métrique est désactivé -->
+<rules>
+  <default>
+    <files>
+      <metrics metric_count="13">
+        <metric id="M0">0</metric>
+        <metric id="M1">0</metric>
+        <metric id="M2">0</metric>
+        <metric id="M3">0</metric>
+        <metric id="M4">0</metric>
+        <metric id="M5">0</metric>
+        <metric id="M6">0</metric>
+        <metric id="M7">0</metric>
+        <metric id="M8">0</metric>
+        <metric id="M9">0</metric>
+        <metric id="M10">0</metric>
+        <metric id="M11">0</metric>
+        <metric id="M12">0</metric>
+      </metrics>
+    </files>
+    <functions>
+      <complexity>10</complexity>
+      <statements>0</statements>
+      <maximum_depth>0</maximum_depth>
+      <calls>0</calls>
+    </functions>
+  </default>
+  <specific>
+    <files>
+      <file name="fichier_complet.c">
+        <!-- Toutes les métriques peuvent etre spécifiées-->
+        <metrics metric_count="13">
+          <metric id="M0">0</metric>
+          <metric id="M1">0</metric>
+          <metric id="M2">0</metric>
+          <metric id="M3">0</metric>
+          <metric id="M4">0</metric>
+          <metric id="M5">0</metric>
+          <metric id="M6">0</metric>
+          <metric id="M7">0</metric>
+          <metric id="M8">0</metric>
+          <metric id="M9">0</metric>
+          <metric id="M10">0</metric>
+          <metric id="M11">0</metric>
+          <metric id="M12">0</metric>
+        </metrics>
+      </file>
+      <file name="fichier_partiel.c">
+        <!--
+        Mais celles qui n'ont pas besoin d'un traitement spécifique par rapport
+        aux default n'ont pas besoin d'etre marqué. Il suffit de renseigner l'id
+        -->
+        <metrics metric_count="13">
+          <!-- M0 à M5 sont omis -->
+          <metric id="M6">0</metric>
+          <!-- M7 à M13 sont omis -->
+        </metrics>
+      </file>
+    </files>
+    <functions>
+      <function name="vcscope_expl_it()">
+        <!-- Comme au dessus seul certain parametre peuvent etre marqué -->
+        <complexity>0</complexity>
+      </function>
+    </functions>
+  </specific>
+</rules>

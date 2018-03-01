@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<sourcemonitor_metrics>
+  <project version="3.5">
+    <project_name>Calibreuse</project_name>
+    <project_directory>C:\Users\antoine.meynard\Source\Repos\MACHINES VC</project_directory>
+    <project_language>C</project_language>
+    <ignore_headers_footers>false</ignore_headers_footers>
+    <export_raw_numbers>false</export_raw_numbers>
+    <metric_names name_count="13">
+      <metric_name id="M0" type="number">Lines</metric_name>
+      <metric_name id="M1" type="number">Statements</metric_name>
+      <metric_name id="M2" type="percent" divisor="M1">Percent Branch Statements</metric_name>
+      <metric_name id="M3" type="percent" divisor="M0">Percent Lines with Comments</metric_name>
+      <metric_name id="M4" type="number">Functions</metric_name>
+      <metric_name id="M5" type="average" divisor="M4">Average Statements per Function</metric_name>
+      <metric_name id="M6" type="string">Line Number of Most Complex Function</metric_name>
+      <metric_name id="M7" type="string">Name of Most Complex Function</metric_name>
+      <metric_name id="M8" type="maximum">Complexity of Most Complex Function</metric_name>
+      <metric_name id="M9" type="string">Line Number of Deepest Block</metric_name>
+      <metric_name id="M10" type="maximum">Maximum Block Depth</metric_name>
+      <metric_name id="M11" type="average" values="block_depths">Average Block Depth</metric_name>
+      <metric_name id="M12" type="average">Average Complexity</metric_name>
+    </metric_names>
+    <checkpoints checkpoint_count="1">
+      <checkpoint checkpoint_name="Checkpoint2" checkpoint_date="2017-08-03" ignore_blank_lines="false" modified_complexity="false">
+        <files file_count="6">
+          <file file_name="STV\Trieuse\stv\src\ttpdsext.c">
+            <metrics metric_count="13">
+              <metric id="M0">461</metric>
+              <metric id="M1">289</metric>
+              <metric id="M2">24,6</metric>
+              <metric id="M3">16,3</metric>
+              <metric id="M4">6</metric>
+              <metric id="M5">42,7</metric>
+              <metric id="M6">88</metric>
+              <metric id="M7">progexplttpdsext()</metric>
+              <metric id="M8">78</metric>
+              <metric id="M9">328</metric>
+              <metric id="M10">9+</metric>
+              <metric id="M11">5,51</metric>
+              <metric id="M12">17,00</metric>
+            </metrics>
+            <function_metrics function_count="6">
+              <function name="initttpdsext()" line="35">
+                <complexity>6</complexity>
+                <statements>25</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="majtabpdsext()" line="412">
+                <complexity>5</complexity>
+                <statements>15</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="progexplttpdsext()" line="88">
+                <complexity>78</complexity>
+                <statements>166</statements>
+                <maximum_depth>21</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="proginterttpdsext()" line="440">
+                <complexity>8</complexity>
+                <statements>19</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="razttpdsext()" line="80">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="recuppdsext()" line="360">
+                <complexity>4</complexity>
+                <statements>30</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+            </function_metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">33</block_depth>
+              <block_depth level="1">21</block_depth>
+              <block_depth level="2">24</block_depth>
+              <block_depth level="3">34</block_depth>
+              <block_depth level="4">27</block_depth>
+              <block_depth level="5">5</block_depth>
+              <block_depth level="6">3</block_depth>
+              <block_depth level="7">3</block_depth>
+              <block_depth level="8">2</block_depth>
+              <block_depth level="9+">137</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="STV\Trieuse\stv\src\ttpdsext.h">
+            <metrics metric_count="13">
+              <metric id="M0">23</metric>
+              <metric id="M1">17</metric>
+              <metric id="M2">0,0</metric>
+              <metric id="M3">34,8</metric>
+              <metric id="M4">0</metric>
+              <metric id="M5">0,0</metric>
+              <metric id="M6"></metric>
+              <metric id="M7"></metric>
+              <metric id="M8">0</metric>
+              <metric id="M9">2</metric>
+              <metric id="M10">1</metric>
+              <metric id="M11">0,41</metric>
+              <metric id="M12">0,00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">10</block_depth>
+              <block_depth level="1">7</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="STV\Trieuse\stv\src\ttvideo.c">
+            <metrics metric_count="13">
+              <metric id="M0">767</metric>
+              <metric id="M1">470</metric>
+              <metric id="M2">22,1</metric>
+              <metric id="M3">14,9</metric>
+              <metric id="M4">9</metric>
+              <metric id="M5">46,4</metric>
+              <metric id="M6">136</metric>
+              <metric id="M7">progexplttvideo()</metric>
+              <metric id="M8">90</metric>
+              <metric id="M9">279</metric>
+              <metric id="M10">9+</metric>
+              <metric id="M11">5,66</metric>
+              <metric id="M12">15,89</metric>
+            </metrics>
+            <function_metrics function_count="9">
+              <function name="calcul_pixel_tps()" line="585">
+                <complexity>1</complexity>
+                <statements>5</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="calculcadencevid()" line="739">
+                <complexity>9</complexity>
+                <statements>18</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="initttvideo()" line="56">
+                <complexity>2</complexity>
+                <statements>43</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="majtablgvideo()" line="647">
+                <complexity>4</complexity>
+                <statements>14</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="majvarlonglargvideo()" line="615">
+                <complexity>3</complexity>
+                <statements>5</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="majvarlonglargvideo2()" line="595">
+                <complexity>3</complexity>
+                <statements>15</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="progexplttvideo()" line="136">
+                <complexity>90</complexity>
+                <statements>262</statements>
+                <maximum_depth>19</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="proginterttvideo()" line="672">
+                <complexity>30</complexity>
+                <statements>55</statements>
+                <maximum_depth>9</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="razttvideo()" line="111">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+            </function_metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">52</block_depth>
+              <block_depth level="1">68</block_depth>
+              <block_depth level="2">24</block_depth>
+              <block_depth level="3">18</block_depth>
+              <block_depth level="4">22</block_depth>
+              <block_depth level="5">17</block_depth>
+              <block_depth level="6">15</block_depth>
+              <block_depth level="7">16</block_depth>
+              <block_depth level="8">28</block_depth>
+              <block_depth level="9+">210</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="STV\Trieuse\stv\src\ttvideo.h">
+            <metrics metric_count="13">
+              <metric id="M0">22</metric>
+              <metric id="M1">17</metric>
+              <metric id="M2">0,0</metric>
+              <metric id="M3">31,8</metric>
+              <metric id="M4">0</metric>
+              <metric id="M5">0,0</metric>
+              <metric id="M6"></metric>
+              <metric id="M7"></metric>
+              <metric id="M8">0</metric>
+              <metric id="M9">2</metric>
+              <metric id="M10">1</metric>
+              <metric id="M11">0,41</metric>
+              <metric id="M12">0,00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">10</block_depth>
+              <block_depth level="1">7</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="STV\Trieuse\stv\src\vcscope.c">
+            <metrics metric_count="13">
+              <metric id="M0">3693</metric>
+              <metric id="M1">1791</metric>
+              <metric id="M2">26,2</metric>
+              <metric id="M3">28,1</metric>
+              <metric id="M4">54</metric>
+              <metric id="M5">28,3</metric>
+              <metric id="M6">2169</metric>
+              <metric id="M7">vcsc_affiche_pesage_sauv()</metric>
+              <metric id="M8">130</metric>
+              <metric id="M9">2633</metric>
+              <metric id="M10">9+</metric>
+              <metric id="M11">4,78</metric>
+              <metric id="M12">11,50</metric>
+            </metrics>
+            <function_metrics function_count="54">
+              <function name="calcule_addr_io()" line="1744">
+                <complexity>7</complexity>
+                <statements>17</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="calculval_vcsc()" line="1129">
+                <complexity>11</complexity>
+                <statements>37</statements>
+                <maximum_depth>6</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="calculval_vcsc_it()" line="1111">
+                <complexity>1</complexity>
+                <statements>8</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="gest_aff_vcscope()" line="3384">
+                <complexity>7</complexity>
+                <statements>17</statements>
+                <maximum_depth>6</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="GR_Vline_vcsc()" line="3351">
+                <complexity>8</complexity>
+                <statements>6</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="init_vcscope()" line="1186">
+                <complexity>1</complexity>
+                <statements>2</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="init_vcscope_var()" line="1229">
+                <complexity>44</complexity>
+                <statements>211</statements>
+                <maximum_depth>14</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="raz_vcscope()" line="1712">
+                <complexity>6</complexity>
+                <statements>18</statements>
+                <maximum_depth>6</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="recalculedelta()" line="1636">
+                <complexity>15</complexity>
+                <statements>21</statements>
+                <maximum_depth>12</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="recalculedelta2()" line="1673">
+                <complexity>15</complexity>
+                <statements>21</statements>
+                <maximum_depth>12</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="rectangle_vcsc()" line="3341">
+                <complexity>2</complexity>
+                <statements>3</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="test_chgt_param_vcscope()" line="1192">
+                <complexity>26</complexity>
+                <statements>50</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_debhoule_vcscope()" line="996">
+                <complexity>3</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_echelle_vcscope()" line="1044">
+                <complexity>8</complexity>
+                <statements>25</statements>
+                <maximum_depth>6</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_finhoule_vcscope()" line="989">
+                <complexity>3</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_finpesage_vcscope()" line="1020">
+                <complexity>5</complexity>
+                <statements>5</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_finscrut_celpes_vcscope()" line="1034">
+                <complexity>3</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="trace_fintrampli_vcscope()" line="1004">
+                <complexity>4</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_affiche_io_sauv()" line="2851">
+                <complexity>50</complexity>
+                <statements>133</statements>
+                <maximum_depth>19</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_affiche_legende_io_sauv()" line="3218">
+                <complexity>15</complexity>
+                <statements>47</statements>
+                <maximum_depth>7</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_affiche_params()" line="2673">
+                <complexity>10</complexity>
+                <statements>12</statements>
+                <maximum_depth>7</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_affiche_params_io()" line="3137">
+                <complexity>5</complexity>
+                <statements>8</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_affiche_pesage_sauv()" line="2169">
+                <complexity>130</complexity>
+                <statements>334</statements>
+                <maximum_depth>23</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_bloque_on_off()" line="2094">
+                <complexity>4</complexity>
+                <statements>11</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_bloque_on_off_io()" line="2824">
+                <complexity>2</complexity>
+                <statements>6</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_calcule_io()" line="3192">
+                <complexity>1</complexity>
+                <statements>4</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_calcule_max_min()" line="2709">
+                <complexity>4</complexity>
+                <statements>9</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_debug()" line="3479">
+                <complexity>1</complexity>
+                <statements>16</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_figer_ecran()" line="3436">
+                <complexity>4</complexity>
+                <statements>13</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_lance_io()" line="2750">
+                <complexity>3</complexity>
+                <statements>5</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_lance_pesee()" line="1776">
+                <complexity>2</complexity>
+                <statements>3</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_c()" line="2054">
+                <complexity>2</complexity>
+                <statements>7</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_io()" line="2813">
+                <complexity>2</complexity>
+                <statements>6</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_pont()" line="1839">
+                <complexity>2</complexity>
+                <statements>4</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_t()" line="1998">
+                <complexity>4</complexity>
+                <statements>9</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_zoom_c()" line="1957">
+                <complexity>4</complexity>
+                <statements>13</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_zoom_io()" line="1906">
+                <complexity>4</complexity>
+                <statements>10</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_moins_zoom_t()" line="1877">
+                <complexity>5</complexity>
+                <statements>12</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_c()" line="2015">
+                <complexity>2</complexity>
+                <statements>7</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_io()" line="2803">
+                <complexity>2</complexity>
+                <statements>5</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_pont()" line="1829">
+                <complexity>2</complexity>
+                <statements>4</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_t()" line="1980">
+                <complexity>4</complexity>
+                <statements>9</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_zoom_c()" line="1930">
+                <complexity>4</complexity>
+                <statements>12</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_zoom_io()" line="2781">
+                <complexity>3</complexity>
+                <statements>9</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_plus_zoom_t()" line="1849">
+                <complexity>4</complexity>
+                <statements>11</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_raz()" line="2119">
+                <complexity>7</complexity>
+                <statements>25</statements>
+                <maximum_depth>7</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_raz_io()" line="2839">
+                <complexity>1</complexity>
+                <statements>7</statements>
+                <maximum_depth>1</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_reaffiche_cbes_bloquees()" line="3330">
+                <complexity>5</complexity>
+                <statements>4</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_recale_io()" line="3201">
+                <complexity>3</complexity>
+                <statements>11</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_recale_max_min()" line="2730">
+                <complexity>4</complexity>
+                <statements>12</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_stoppe_io()" line="2768">
+                <complexity>2</complexity>
+                <statements>6</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcsc_stoppe_pesee()" line="1791">
+                <complexity>4</complexity>
+                <statements>20</statements>
+                <maximum_depth>5</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcscope_expl()" line="540">
+                <complexity>92</complexity>
+                <statements>180</statements>
+                <maximum_depth>18</maximum_depth>
+                <calls>0</calls>
+              </function>
+              <function name="vcscope_expl_it()" line="313">
+                <complexity>59</complexity>
+                <statements>97</statements>
+                <maximum_depth>14</maximum_depth>
+                <calls>0</calls>
+              </function>
+            </function_metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">235</block_depth>
+              <block_depth level="1">304</block_depth>
+              <block_depth level="2">153</block_depth>
+              <block_depth level="3">101</block_depth>
+              <block_depth level="4">102</block_depth>
+              <block_depth level="5">88</block_depth>
+              <block_depth level="6">86</block_depth>
+              <block_depth level="7">56</block_depth>
+              <block_depth level="8">102</block_depth>
+              <block_depth level="9+">564</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="STV\Trieuse\stv\src\vcscope.h">
+            <metrics metric_count="13">
+              <metric id="M0">117</metric>
+              <metric id="M1">79</metric>
+              <metric id="M2">0,0</metric>
+              <metric id="M3">46,2</metric>
+              <metric id="M4">0</metric>
+              <metric id="M5">0,0</metric>
+              <metric id="M6"></metric>
+              <metric id="M7"></metric>
+              <metric id="M8">0</metric>
+              <metric id="M9">4</metric>
+              <metric id="M10">1</metric>
+              <metric id="M11">0,42</metric>
+              <metric id="M12">0,00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">46</block_depth>
+              <block_depth level="1">33</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+        </files>
+      </checkpoint>
+    </checkpoints>
+  </project>
+</sourcemonitor_metrics>
