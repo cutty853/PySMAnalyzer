@@ -1,7 +1,7 @@
 # coding: utf-8
 
 """
-  Test module for the entity.function module
+  Test module for the entity.functions module
 """
 
 import unittest

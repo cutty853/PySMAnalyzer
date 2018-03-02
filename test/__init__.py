@@ -14,6 +14,7 @@ def run():
     # List all the TestCase to import in the test suite
     tests = []
     tests.append(test_entity.test_functions_suite)
+    tests.append(test_entity.test_files_suite)
     tests.append(test_entity.test_metrics_suite)
 
     # Define the final TestSuite
