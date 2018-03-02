@@ -9,9 +9,9 @@
 # pylint: disable=C0103
 
 import unittest
-from . import test_function
+from . import test_functions
 from . import test_metrics
 
 loader = unittest.TestLoader()
-test_function_suite = loader.loadTestsFromModule(test_function)
+test_functions_suite = loader.loadTestsFromModule(test_functions)
 test_metrics_suite = loader.loadTestsFromModule(test_metrics)
