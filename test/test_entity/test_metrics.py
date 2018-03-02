@@ -46,7 +46,7 @@ class TestFileMetrics(unittest.TestCase):
         """ Test the get method of FileMetrics object """
         self.assertEqual(self.test_metrics.get("M1"), 289)
         # Also testing for string...
-        self.assertEqual(self.test_metrics.get("M5"), "progexplttpdsext()")
+        self.assertEqual(self.test_metrics.get("M7"), "progexplttpdsext()")
 
 
 class TestFunctionMetrics(unittest.TestCase):
