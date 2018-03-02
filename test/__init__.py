@@ -15,6 +15,7 @@ def run():
     # List all the TestCase to import in the test suite
     tests = []
     tests.append(test_entity.test_function_suite)
+    tests.append(test_entity.test_metrics_suite)
 
     # Define the final TestSuite
     test_suite = unittest.TestSuite(tests)
