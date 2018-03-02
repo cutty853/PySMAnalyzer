@@ -8,6 +8,7 @@
 import utils
 import reader.finders as finders
 from . import metrics
+from . import functions
 
 
 class FileNotFound(Exception):
@@ -20,7 +21,7 @@ class File:
     def __init__(self, name):
         self.name = name
         self.metrics = None
-        self.functions = []
+        self.functions = set()
 
     def __str__(self):
         infos = "File called {} has {} functions".format(
@@ -58,3 +59,15 @@ class File:
         }
 
         self.metrics = metrics.FileMetrics(metrics_dict)
+
+    def load_functions(self, xml_input):
+        """ Load all the functions for the file """
+        # Getting the xml tree of the file's functions
+        file_tree = self.search_tree(xml_input)
+        functions_tree = file_tree[1]
+
+        # Adding each function to the file's function list
+        for function_tree in functions_tree:
+            func = functions.Function(self.name, function_tree.get("name"))
+            func.load_metrics(xml_input)
+            self.functions.add(func)

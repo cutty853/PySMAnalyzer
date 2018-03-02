@@ -59,3 +59,23 @@ class TestFile(unittest.TestCase):
         self.assertEqual(my_file.metrics.get("M10"), "9+")
         self.assertEqual(my_file.metrics.get("M11"), 5.51)
         self.assertEqual(my_file.metrics.get("M12"), 17.0)
+
+    def test_load_functions(self):
+        """ test for the load_functions method """
+        tree = etree.parse("samples/sample.xml")
+        my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
+        my_file.load_functions(tree)
+        functions_name = [
+            "initttpdsext()",
+            "majtabpdsext()",
+            "progexplttpdsext()",
+            "proginterttpdsext()",
+            "razttpdsext()",
+            "recuppdsext()"
+        ]
+
+        self.assertEqual(len(my_file.functions), 6)
+        for function in my_file.functions:
+            self.assertIn(function.name, functions_name)
+            # Verify that metrics where truely loaded
+            self.assertNotEqual(function.metrics, None)

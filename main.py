@@ -56,6 +56,7 @@ def main():  # pragma: no cover
     tree = etree.parse("samples/sample.xml")
     my_func.load_metrics(tree)
     my_file.load_metrics(tree)
+    my_file.load_functions(tree)
 
     print(my_file)
     print(my_func)
