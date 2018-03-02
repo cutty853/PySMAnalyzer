@@ -34,6 +34,7 @@ class TestUtils(unittest.TestCase):
             " Hello I have a test message "
         )
 
+
 def run():
     """ main du programme """
     test_suite = unittest.TestLoader().loadTestsFromTestCase(TestUtils)

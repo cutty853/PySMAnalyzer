@@ -12,3 +12,10 @@ class FunctionMetrics:
         self.statements = statements
         self.maximum_depth = maximum_depth
         self.calls = calls
+
+    def __str__(self):
+        f_string = \
+            "complexity: {}; statements: {}; maximum_depth: {}; calls: {}"
+        return f_string.format(
+            self.complexity, self.statements, self.maximum_depth, self.calls
+        )
