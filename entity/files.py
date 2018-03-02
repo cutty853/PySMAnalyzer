@@ -5,6 +5,7 @@
   Module for the function entity
 """
 
+import utils
 import reader.finders as finders
 from . import metrics
 
@@ -31,6 +32,14 @@ class File:
                 str(self.metrics).replace("; ", "\n  ")
         return infos + metrics_string
 
+    def search_tree(self, xml_input):
+        """ Return the tree of the file found in the xml_input """
+        func_finder = finders.create_file_finder(self.name)
+        try:
+            return func_finder(xml_input)[0]
+        except IndexError:
+            raise FileNotFound("The file doesn't exist !")
+
     def load_metrics(self, xml_input):
         """
         Description:
@@ -40,25 +49,12 @@ class File:
         Arguments:
             xml_input: the source-monitor's xml tree
         """
-        func_finder = finders.create_file_finder(self.name)
-        try:
-            file_tree = func_finder(xml_input)[0]
-        except IndexError:
-            raise FileNotFound("The file doesn't exist !")
+        file_tree = self.search_tree(xml_input)
 
         metrics_tree = file_tree[0]
-
-        metrics_dict = {}
-        for i in range(int(file_tree[0].get("metric_count"))):
-            try:
-                metric_value = int(metrics_tree[i].text)
-            except ValueError:
-                try:
-                    metric_value = float(
-                        metrics_tree[i].text.replace(",", ".")
-                    )
-                except ValueError:
-                    metric_value = metrics_tree[i].text
-            metrics_dict[metrics_tree[i].get("id")] = metric_value
+        metrics_dict = {
+            metrics_tree[i].get("id"): utils.cast_string(metrics_tree[i].text)
+            for i in range(int(file_tree[0].get("metric_count")))
+        }
 
         self.metrics = metrics.FileMetrics(metrics_dict)

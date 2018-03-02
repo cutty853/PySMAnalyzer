@@ -34,6 +34,13 @@ class TestUtils(unittest.TestCase):
             " Hello I have a test message "
         )
 
+    def test_cast_string(self):
+        """
+            Test for the cast_string function used to convert string to int or
+            float
+        """
+        pass
+
 
 def run():
     """ main du programme """

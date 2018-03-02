@@ -5,6 +5,7 @@
   Module for the function entity
 """
 
+import utils
 import reader.finders as finders
 from . import metrics
 
@@ -30,6 +31,15 @@ class Function:
                 str(self.metrics).replace("; ", "\n  ")
         return infos + metrics_string
 
+    def search_tree(self, xml_input):
+        """ Return the tree of the function found in the xml_input """
+        func_finder = \
+            finders.create_function_finder(self.source_file, self.name)
+        try:
+            return func_finder(xml_input)[0]
+        except IndexError:
+            raise FunctionNotFound("The function doesn't exist !")
+
     def load_metrics(self, xml_input):
         """
         Description:
@@ -39,17 +49,11 @@ class Function:
         Arguments:
             xml_input: the source-monitor's xml tree
         """
-        func_finder = \
-            finders.create_function_finder(self.source_file, self.name)
-        try:
-            func_tree = func_finder(xml_input)[0]
-        except IndexError:
-            raise FunctionNotFound("The function doesn't exist !")
+        func_tree = self.search_tree(xml_input)
 
-        # Here we assume that sm file won't contain "impossible to int" text
         self.metrics = metrics.FunctionMetrics(
-            int(func_tree[0].text),
-            int(func_tree[1].text),
-            int(func_tree[2].text),
-            int(func_tree[3].text)
+            utils.cast_string(func_tree[0].text),
+            utils.cast_string(func_tree[1].text),
+            utils.cast_string(func_tree[2].text),
+            utils.cast_string(func_tree[3].text)
         )
