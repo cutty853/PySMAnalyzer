@@ -15,9 +15,16 @@ class TestFile(unittest.TestCase):
     def shortDescription(self):
         return None
 
+    def setUp(self):
+        self.tree = etree.parse("samples/sample.xml")
+        self.test_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
+
+    def tearDown(self):
+        del self.tree
+        del self.test_file
+
     def test___str__(self):
         """ test string conversion """
-        my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
         final_string =  \
             r"File called STV\Trieuse\stv\src\ttpdsext.c has 0 functions"
         metrics_final_string = final_string + \
@@ -28,43 +35,39 @@ class TestFile(unittest.TestCase):
             "  M10: 9+\n" + "  M11: 5.51\n" + "  M12: 17.0"
 
         # Basic string output (without metrics)
-        self.assertEqual(str(my_file), final_string)
+        self.assertEqual(str(self.test_file), final_string)
 
         # Complex string ouput (with metrics)
-        tree = etree.parse("samples/sample.xml")
-        my_file.load_metrics(tree)
-        self.assertEqual(str(my_file), metrics_final_string)
+        self.test_file.load_metrics(self.tree)
+        self.assertEqual(str(self.test_file), metrics_final_string)
 
     def test_load_metrics(self):
         """ test the load_metrics method """
-        tree = etree.parse("samples/sample.xml")
-        my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
         # The asked file doesn't exist in the sample file
         my_bad_file = files.File(r"STV\Trieuse\stv\src\ttdsext.c")
-
         with self.assertRaises(files.FileNotFound):
-            my_bad_file.load_metrics(tree)
+            my_bad_file.load_metrics(self.tree)
 
-        my_file.load_metrics(tree)
-        self.assertEqual(my_file.metrics.get("M0"), 461)
-        self.assertEqual(my_file.metrics.get("M1"), 289)
-        self.assertEqual(my_file.metrics.get("M2"), 24.6)
-        self.assertEqual(my_file.metrics.get("M3"), 16.3)
-        self.assertEqual(my_file.metrics.get("M4"), 6)
-        self.assertEqual(my_file.metrics.get("M5"), 42.7)
-        self.assertEqual(my_file.metrics.get("M6"), 88)
-        self.assertEqual(my_file.metrics.get("M7"), "progexplttpdsext()")
-        self.assertEqual(my_file.metrics.get("M8"), 78)
-        self.assertEqual(my_file.metrics.get("M9"), 328)
-        self.assertEqual(my_file.metrics.get("M10"), "9+")
-        self.assertEqual(my_file.metrics.get("M11"), 5.51)
-        self.assertEqual(my_file.metrics.get("M12"), 17.0)
+        self.test_file.load_metrics(self.tree)
+        self.assertEqual(self.test_file.metrics.get("M0"), 461)
+        self.assertEqual(self.test_file.metrics.get("M1"), 289)
+        self.assertEqual(self.test_file.metrics.get("M2"), 24.6)
+        self.assertEqual(self.test_file.metrics.get("M3"), 16.3)
+        self.assertEqual(self.test_file.metrics.get("M4"), 6)
+        self.assertEqual(self.test_file.metrics.get("M5"), 42.7)
+        self.assertEqual(self.test_file.metrics.get("M6"), 88)
+        self.assertEqual(
+            self.test_file.metrics.get("M7"), "progexplttpdsext()"
+        )
+        self.assertEqual(self.test_file.metrics.get("M8"), 78)
+        self.assertEqual(self.test_file.metrics.get("M9"), 328)
+        self.assertEqual(self.test_file.metrics.get("M10"), "9+")
+        self.assertEqual(self.test_file.metrics.get("M11"), 5.51)
+        self.assertEqual(self.test_file.metrics.get("M12"), 17.0)
 
     def test_load_functions(self):
         """ test for the load_functions method """
-        tree = etree.parse("samples/sample.xml")
-        my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
-        my_file.load_functions(tree)
+        self.test_file.load_functions(self.tree)
         functions_name = [
             "initttpdsext()",
             "majtabpdsext()",
@@ -74,8 +77,8 @@ class TestFile(unittest.TestCase):
             "recuppdsext()"
         ]
 
-        self.assertEqual(len(my_file.functions), 6)
-        for function in my_file.functions:
+        self.assertEqual(len(self.test_file.functions), 6)
+        for function in self.test_file.functions:
             self.assertIn(function.name, functions_name)
             # Verify that metrics where truely loaded
             self.assertNotEqual(function.metrics, None)
