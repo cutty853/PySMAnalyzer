@@ -19,6 +19,7 @@ class FileMetrics:
         """ Return the value of the metrics named id_name """
         return self._metrics[id_name]
 
+
 class FunctionMetrics:
     def __init__(self, complexity=0, statements=0, maximum_depth=0, calls=0):
         self.complexity = complexity
