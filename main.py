@@ -8,6 +8,10 @@
 """
 
 import argparse
+from utils import center
+
+
+FRAME_SIZE = 70
 
 
 def options_parser():
@@ -24,14 +28,23 @@ def options_parser():
 
 def main():
     """ main du programme """
-    print("PySMAnalyzer programmed with love by cutty853")
+    print("*" * FRAME_SIZE)
+    print(center("PySMAnalyzer programmed with love by cutty853", FRAME_SIZE))
     options = options_parser()
+
     if options.test:
-        print("Loading all the unit-test of the project")
         import test
+        import test_utils
+        import sys
+
+        print(center("Loading all the unit-test of the project", FRAME_SIZE))
+        print("*" * FRAME_SIZE)
+
         test.run()
+        test_utils.run()
+        sys.exit(0)
 
-
+    print("*" * FRAME_SIZE, "\n")
 
 
 if __name__ == "__main__":
