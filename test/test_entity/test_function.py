@@ -8,16 +8,16 @@
 import unittest
 from lxml import etree
 
-import entity.function as function
+import entity.functions as functions
 
 
 class TestFunction(unittest.TestCase):
-    """ Test case for the Function class in the entity.function module """
+    """ Test case for the Function class in the entity.functions module """
     def shortDescription(self):
         return None
 
     def test___str__(self):
-        my_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
+        my_func = functions.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                     "initttpdsext()")
         final_string =  \
             r"Function called initttpdsext() in STV\Trieuse\stv\src\ttpdsext.c"
@@ -37,13 +37,13 @@ class TestFunction(unittest.TestCase):
     def test_load_metrics(self):
         """ test the load_metrics method """
         tree = etree.parse("samples/sample.xml")
-        my_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
+        my_func = functions.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                     "initttpdsext()")
         # The asked function doesn't exist in the sample file
-        my_bad_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
+        my_bad_func = functions.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                         "initttpxt()")
 
-        with self.assertRaises(function.FunctionNotFound):
+        with self.assertRaises(functions.FunctionNotFound):
             my_bad_func.load_metrics(tree)
 
         my_func.load_metrics(tree)
