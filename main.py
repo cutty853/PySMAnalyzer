@@ -11,6 +11,7 @@ import argparse
 from lxml import etree
 
 import entity.functions as functions
+import entity.files as files
 from utils import center
 
 
@@ -50,8 +51,13 @@ def main():  # pragma: no cover
     print("*" * FRAME_SIZE, "\n")
     my_func = functions.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                  "initttpdsext()")
+    my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
+
     tree = etree.parse("samples/sample.xml")
     my_func.load_metrics(tree)
+    my_file.load_metrics(tree)
+
+    print(my_file)
     print(my_func)
 
 
