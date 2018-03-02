@@ -29,8 +29,8 @@ def options_parser():
     return parser.parse_args()
 
 
-def main():
-    """ main du programme """
+def main():  # pragma: no cover
+    """ main du programme. this function is not covered by coverage.py """
     print("*" * FRAME_SIZE)
     print(center("PySMAnalyzer programmed with love by cutty853", FRAME_SIZE))
     options = options_parser()

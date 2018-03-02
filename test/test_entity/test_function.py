@@ -16,21 +16,29 @@ class TestFunction(unittest.TestCase):
     def shortDescription(self):
         return None
 
+    def test___str__(self):
+        my_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
+                                    "initttpdsext()")
+        final_string =  \
+            r"Function called initttpdsext() in STV\Trieuse\stv\src\ttpdsext.c"
+        metrics_final_string = final_string + \
+            " has following metrics:\n" + \
+            "  complexity: 6\n" + "  statements: 25\n" + \
+            "  maximum_depth: 4\n" + "  calls: 0"
+
+        # Basic string output (without metrics)
+        self.assertEqual(str(my_func), final_string)
+
+        # Complex string ouput (with metrics)
+        tree = etree.parse("samples/sample.xml")
+        my_func.load_metrics(tree)
+        self.assertEqual(str(my_func), metrics_final_string)
+
     def test_load_metrics(self):
         """ test the load_metrics method """
+        tree = etree.parse("samples/sample.xml")
         my_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                     "initttpdsext()")
-        try:
-            tree = etree.parse("samples/sample.xml")
-        except OSError:
-            print("samples/sample.xml doesn't exist you should not erase it")
-            print("since this file is needed for the unittest of the project")
-            print("\n\n\n")
-            raise
-
-        my_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
-                                    "initttpdsext()")
-
         # The asked function doesn't exist in the sample file
         my_bad_func = function.Function(r"STV\Trieuse\stv\src\ttpdsext.c",
                                         "initttpxt()")
