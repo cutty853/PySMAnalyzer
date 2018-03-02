@@ -27,8 +27,11 @@ def main():
     print("PySMAnalyzer programmed with love by cutty853")
     options = options_parser()
     if options.test:
-        # import test
         print("Loading all the unit-test of the project")
+        import test
+        test.run()
+
+
 
 
 if __name__ == "__main__":
