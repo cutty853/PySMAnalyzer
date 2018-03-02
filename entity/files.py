@@ -64,9 +64,18 @@ class File:
             raise FileNotFound("The file doesn't exist !")
 
         metrics_tree = file_tree[0]
-        metrics_dict = {
-            metrics_tree[i].get("id"): metrics_tree[i].text for i in range(
-                int(file_tree[0].get("metric_count"))
-            )
-        }
+
+        metrics_dict = {}
+        for i in range(int(file_tree[0].get("metric_count"))):
+            try:
+                metric_value = int(metrics_tree[i].text)
+            except ValueError:
+                try:
+                    metric_value = float(
+                        metrics_tree[i].text.replace(",", ".")
+                    )
+                except ValueError:
+                    metric_value = metrics_tree[i].text
+            metrics_dict[metrics_tree[i].get("id")] = metric_value
+
         self.metrics = metrics.FileMetrics(metrics_dict)
