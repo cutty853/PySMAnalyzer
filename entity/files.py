@@ -5,25 +5,8 @@
   Module for the function entity
 """
 
-from lxml import etree
+import reader.finders as finders
 from . import metrics
-
-
-def create_file_finder(filename):
-    """
-        Return a function that search for the file named 'filename'. The
-        returned function will find the function from an lxml.etree tree.
-        Assuming that I have an xml tree called 'my_xml', that I need to find
-        the file 'my_file.c' file. I will use file_finder like this:
-
-        >>> my_file_finder = file_finder('my_file.c')
-        >>> my_file_finder(my_xml)
-    """
-    path_format = "/sourcemonitor_metrics/project/checkpoints/" + \
-                  "checkpoint[last()]/files/" +                   \
-                  "file[@file_name='{}']"
-    path = path_format.format(filename)
-    return etree.XPath(path)
 
 
 class FileNotFound(Exception):
@@ -57,7 +40,7 @@ class File:
         Arguments:
             xml_input: the source-monitor's xml tree
         """
-        func_finder = create_file_finder(self.name)
+        func_finder = finders.create_file_finder(self.name)
         try:
             file_tree = func_finder(xml_input)[0]
         except IndexError:

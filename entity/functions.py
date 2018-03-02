@@ -5,28 +5,8 @@
   Module for the function entity
 """
 
-from lxml import etree
+import reader.finders as finders
 from . import metrics
-
-
-def create_function_finder(source_file, func_name):
-    """
-        Return a function that search for the function named 'func_name' and
-        come from the source file named 'source_file'. The returned function
-        will find the function from an lxml.etree tree.
-        Assuming that I have an xml tree called 'my_xml', that I need to find
-        the function 'my_func' into the 'my_file.c' file. I will use
-        function_finder like this:
-
-        >>> my_func_finder = function_finder('my_file.c', 'my_func()')
-        >>> my_func_finder(my_xml)
-    """
-    base_path = "/sourcemonitor_metrics/project/checkpoints/" + \
-                "checkpoint[last()]/files/" +                   \
-                "file[@file_name='{}']/" +                      \
-                "function_metrics/function[@name='{}']"
-    path = base_path.format(source_file, func_name)
-    return etree.XPath(path)
 
 
 class FunctionNotFound(Exception):
@@ -59,7 +39,8 @@ class Function:
         Arguments:
             xml_input: the source-monitor's xml tree
         """
-        func_finder = create_function_finder(self.source_file, self.name)
+        func_finder = \
+            finders.create_function_finder(self.source_file, self.name)
         try:
             func_tree = func_finder(xml_input)[0]
         except IndexError:
