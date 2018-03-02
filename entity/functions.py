@@ -6,7 +6,7 @@
 """
 
 import utils
-import reader.finders as finders
+import reader.smreader as smreader
 from . import metrics
 
 
@@ -34,7 +34,7 @@ class Function:
     def search_tree(self, xml_input):
         """ Return the tree of the function found in the xml_input """
         func_finder = \
-            finders.create_function_finder(self.source_file, self.name)
+            smreader.create_function_finder(self.source_file, self.name)
         try:
             return func_finder(xml_input)[0]
         except IndexError:

@@ -8,7 +8,7 @@
 # pylint: disable=C0103
 
 import unittest
-from . import test_finders
+from . import test_smreader
 
 loader = unittest.TestLoader()
-test_finders_suite = loader.loadTestsFromModule(test_finders)
+test_smreader_suite = loader.loadTestsFromModule(test_smreader)

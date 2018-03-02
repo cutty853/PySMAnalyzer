@@ -6,7 +6,7 @@
 """
 
 import utils
-import reader.finders as finders
+import reader.smreader as smreader
 from . import metrics
 from . import functions
 
@@ -35,7 +35,7 @@ class File:
 
     def search_tree(self, xml_input):
         """ Return the tree of the file found in the xml_input """
-        func_finder = finders.create_file_finder(self.name)
+        func_finder = smreader.create_file_finder(self.name)
         try:
             return func_finder(xml_input)[0]
         except IndexError:

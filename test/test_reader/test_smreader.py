@@ -6,11 +6,11 @@
 
 import unittest
 from lxml import etree
-import reader.finders as finders
+import reader.smreader as smreader
 
 
 class TestFinders(unittest.TestCase):
-    """ TestCase for all the functions in the reader.finders module """
+    """ TestCase for all the functions in the reader.smreader module """
 
     def shortDescription(self):
         return None
@@ -20,7 +20,7 @@ class TestFinders(unittest.TestCase):
         # Only testing function_abs_path is enough because it will call
         # file_abs_path which itself calls last_checkpoint_abs_path
         self.assertEqual(
-            finders.function_abs_path("test_source.c", "my_func"),
+            smreader.function_abs_path("test_source.c", "my_func"),
             "/sourcemonitor_metrics/project/checkpoints/checkpoint[last()]" +
             "/files/file[@file_name='test_source.c']" +
             "/function_metrics/function[@name='my_func']"
@@ -28,7 +28,7 @@ class TestFinders(unittest.TestCase):
 
     def test_create_file_finder(self):
         """ test for the function that create XPath file finder """
-        file_finder = finders.create_file_finder("test_source.c")
+        file_finder = smreader.create_file_finder("test_source.c")
 
         self.assertIsInstance(file_finder, etree.XPath)
         self.assertEqual(
@@ -39,7 +39,7 @@ class TestFinders(unittest.TestCase):
 
     def test_create_function_finder(self):
         """ test for the function that create XPath function finder """
-        func_finder = finders.create_function_finder(
+        func_finder = smreader.create_function_finder(
             "test_source.c", "my_func"
         )
 

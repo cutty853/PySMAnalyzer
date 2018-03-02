@@ -18,7 +18,7 @@ def run():
     tests.append(test_entity.test_files_suite)
     tests.append(test_entity.test_metrics_suite)
 
-    tests.append(test_reader.test_finders_suite)
+    tests.append(test_reader.test_smreader_suite)
 
     # Define the final TestSuite
     test_suite = unittest.TestSuite(tests)

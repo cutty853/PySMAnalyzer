@@ -2,7 +2,8 @@
 # coding: utf-8
 
 """
-  Module that contains finders definition. Finders are made to find specific
+  Module dedicated to the source-monitor xml report parsing with lxml
+  This module contains finders definition. Finders are made to find specific
   structure/tree through the source-monitor xml report.
 """
 
