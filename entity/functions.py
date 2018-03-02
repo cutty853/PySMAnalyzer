@@ -18,7 +18,7 @@ class FunctionNotFound(Exception):
 class Function:
     """ Represent source-monitor function object """
 
-    def __init__(self, source_file="", name=""):
+    def __init__(self, source_file, name):
         self.source_file = source_file
         self.name = name
         self.metrics = None

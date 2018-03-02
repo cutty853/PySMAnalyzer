@@ -17,7 +17,7 @@ class FileNotFound(Exception):
 
 class File:
     """docstring for File."""
-    def __init__(self, name=""):
+    def __init__(self, name):
         self.name = name
         self.metrics = None
         self.functions = []
