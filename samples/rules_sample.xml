@@ -46,6 +46,14 @@
           <metric id="M12">disable</metric>
         </metrics>
         <!-- Si pas de bloc "functions" ce sont celle par défaut qui son utilisés -->
+        <function_metrics>
+            <function name="initttpdsext()">
+                <!-- Comme au dessus seul certain parametre peuvent etre marqué -->
+                <!-- disable metric -->
+                <complexity>disable</complexity>
+            </function>
+        </function_metrics>
+
       </file>
       <file name="STV\Trieuse\stv\src\ttvideo.c">
         <!--
