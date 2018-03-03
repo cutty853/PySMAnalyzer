@@ -1,4 +1,4 @@
-<!-- 0: la métrique est désactivé -->
+<!-- disable: la métrique est désactivé -->
 <rules>
   <default>
     <files>
@@ -17,51 +17,54 @@
         <metric id="M11">0</metric>
         <metric id="M12">0</metric>
       </metrics>
+      <function_metrics>
+          <complexity>10</complexity>
+          <statements>0</statements>
+          <maximum_depth>0</maximum_depth>
+          <calls>0</calls>
+      </function_metrics>
     </files>
-    <functions>
-      <complexity>10</complexity>
-      <statements>0</statements>
-      <maximum_depth>0</maximum_depth>
-      <calls>0</calls>
-    </functions>
   </default>
   <specific>
     <files>
-      <file name="fichier_complet.c">
+      <file name="STV\Trieuse\stv\src\ttpdsext.c">
         <!-- Toutes les métriques peuvent etre spécifiées-->
+        <!-- disabling all file metrics for this file -->
         <metrics metric_count="13">
-          <metric id="M0">0</metric>
-          <metric id="M1">0</metric>
-          <metric id="M2">0</metric>
-          <metric id="M3">0</metric>
-          <metric id="M4">0</metric>
-          <metric id="M5">0</metric>
-          <metric id="M6">0</metric>
-          <metric id="M7">0</metric>
-          <metric id="M8">0</metric>
-          <metric id="M9">0</metric>
-          <metric id="M10">0</metric>
-          <metric id="M11">0</metric>
-          <metric id="M12">0</metric>
+          <metric id="M0">disable</metric>
+          <metric id="M1">disable</metric>
+          <metric id="M2">disable</metric>
+          <metric id="M3">disable</metric>
+          <metric id="M4">disable</metric>
+          <metric id="M5">disable</metric>
+          <metric id="M6">disable</metric>
+          <metric id="M7">disable</metric>
+          <metric id="M8">disable</metric>
+          <metric id="M9">disable</metric>
+          <metric id="M10">disable</metric>
+          <metric id="M11">disable</metric>
+          <metric id="M12">disable</metric>
         </metrics>
+        <!-- Si pas de bloc "functions" ce sont celle par défaut qui son utilisés -->
       </file>
-      <file name="fichier_partiel.c">
+      <file name="STV\Trieuse\stv\src\ttvideo.c">
         <!--
         Mais celles qui n'ont pas besoin d'un traitement spécifique par rapport
         aux default n'ont pas besoin d'etre marqué. Il suffit de renseigner l'id
         -->
         <metrics metric_count="13">
           <!-- M0 à M5 sont omis -->
-          <metric id="M6">0</metric>
+          <metric id="M6">disable</metric>
           <!-- M7 à M13 sont omis -->
         </metrics>
+        <function_metrics>
+            <function name="progexplttvideo()">
+                <!-- Comme au dessus seul certain parametre peuvent etre marqué -->
+                <!-- disable metric -->
+                <complexity>disable</complexity>
+            </function>
+        </function_metrics>
       </file>
     </files>
-    <functions>
-      <function name="vcscope_expl_it()">
-        <!-- Comme au dessus seul certain parametre peuvent etre marqué -->
-        <complexity>0</complexity>
-      </function>
-    </functions>
   </specific>
 </rules>
