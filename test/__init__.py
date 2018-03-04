@@ -19,6 +19,7 @@ def run():
     tests.append(test_entity.test_metrics_suite)
 
     tests.append(test_reader.test_smreader_suite)
+    tests.append(test_reader.test_rules_reader_suite)
 
     # Define the final TestSuite
     test_suite = unittest.TestSuite(tests)

@@ -45,7 +45,7 @@ def default_file_rules_tree():
         >>> my_rules_finder = default_file_rules_tree()
         >>> my_rules_finder(my_xml)
     """
-    return etree.XPath(DEFAULT_FUNCTION_RULES_PATH)
+    return etree.XPath(DEFAULT_FILE_RULES_PATH)
 
 
 def specific_function_rules_tree(source_file, function_name):
