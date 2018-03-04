@@ -48,6 +48,13 @@ class TestFileMetrics(unittest.TestCase):
         # Also testing for string...
         self.assertEqual(self.test_metrics.get("M7"), "progexplttpdsext()")
 
+    def test_set(self):
+        """ Test the set method of FileMetrics class """
+        self.test_metrics.set("M0", 450)
+        self.assertEqual(self.test_metrics.get("M0"), 450)
+        self.test_metrics.set("M7", "my_func")
+        self.assertEqual(self.test_metrics.get("M7"), "my_func")
+
 
 class TestFunctionMetrics(unittest.TestCase):
     """docstring for TestFunctionMetrics """
@@ -63,3 +70,15 @@ class TestFunctionMetrics(unittest.TestCase):
         metrics_string = \
             "complexity: 7; statements: 25; maximum_depth: 3; calls: 5"
         self.assertEqual(str(self.test_metrics), metrics_string)
+
+    def test_setters(self):
+        """ Test all the setter of the FunctionMetrics class """
+        self.test_metrics.set_complexity(10)
+        self.test_metrics.set_statements(10)
+        self.test_metrics.set_maximum_depth(10)
+        self.test_metrics.set_calls(10)
+
+        self.assertEqual(self.test_metrics.complexity, 10)
+        self.assertEqual(self.test_metrics.statements, 10)
+        self.assertEqual(self.test_metrics.maximum_depth, 10)
+        self.assertEqual(self.test_metrics.calls, 10)
