@@ -65,11 +65,19 @@ class TestFunctionMetrics(unittest.TestCase):
     def setUp(self):
         self.test_metrics = metrics.FunctionMetrics(7, 25, 3, 5)
 
+    def tearDown(self):
+        del self.test_metrics
+
     def test___str__(self):
         """ String conversion test """
         metrics_string = \
             "complexity: 7; statements: 25; maximum_depth: 3; calls: 5"
         self.assertEqual(str(self.test_metrics), metrics_string)
+
+    def test___iter__(self):
+        """ iterator test """
+        for metric, value in zip(self.test_metrics, (7, 25, 3, 5)):
+            self.assertEqual(metric, value)
 
     def test_setters(self):
         """ Test all the setter of the FunctionMetrics class """

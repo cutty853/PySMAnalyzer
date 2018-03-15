@@ -40,6 +40,7 @@ class Function:
         self.name = name
         self.metrics = None
         self.rules = None
+        self.validity = True
 
     def __str__(self):
         infos = "Function called {} in {}".format(self.name, self.source_file)
@@ -117,3 +118,12 @@ class Function:
         """
         self.load_default_rules(xml_input)
         self.load_specific_rules(xml_input)
+
+    def check_validity(self):
+        """
+        Description:
+            Check if a function is valid according to its rules
+        """
+        for metric, rule in zip(self.metrics, self.rules):
+            if rule != "disable" and metric > rule:
+                self.validity = False

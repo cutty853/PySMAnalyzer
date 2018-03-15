@@ -42,6 +42,12 @@ class FunctionMetrics:
             self.complexity, self.statements, self.maximum_depth, self.calls
         )
 
+    def __iter__(self):
+        yield self.complexity
+        yield self.statements
+        yield self.maximum_depth
+        yield self.calls
+
     def set_complexity(self, complexity):
         """ complexity setter """
         self.complexity = complexity

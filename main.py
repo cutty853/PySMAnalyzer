@@ -58,12 +58,14 @@ def main():  # pragma: no cover
     rules_tree = etree.parse("samples/rules_sample.xml", parser=xml_parser)
     my_func.load_metrics(tree)
     my_func.load_rules(rules_tree)
+    my_func.check_validity()
     my_file.load_metrics(tree)
     my_file.load_functions(tree)
     my_file.load_rules(rules_tree)
 
     print(my_func.rules)
     print(my_file.rules)
+    print("hey", my_func.validity)
 
     print(my_file)
     print(my_func)
