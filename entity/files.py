@@ -10,7 +10,6 @@ import reader.smreader as smreader
 import reader.rules_reader as rules_reader
 from . import metrics
 from . import functions
-from lxml import etree
 
 
 def create_file_metrics(file_tree):
@@ -109,16 +108,8 @@ class File:
             # Their is no rules_tree for this file
             return
 
-        print(etree.tostring(specific_rules_tree[0], pretty_print=True))
-
         for metric in specific_rules_tree[0]:  # iterate over metrics
-            # skipping comment tag
-            if isinstance(metric.tag, str):
-                print(metric.get("id"), "change by", utils.cast_string(metric.text))
-                self.rules.set(
-                    metric.get("id"),
-                    utils.cast_string(metric.text)
-                )
+            self.rules.set(metric.get("id"), utils.cast_string(metric.text))
 
     def load_rules(self, xml_input):
         """

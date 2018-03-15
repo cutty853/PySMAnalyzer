@@ -104,9 +104,7 @@ class Function:
         }
 
         for metric in specific_rules_tree:
-            # this test allow comment tag
-            if isinstance(metric.tag, str):
-                modifiers[metric.tag](utils.cast_string(metric.text))
+            modifiers[metric.tag](utils.cast_string(metric.text))
 
     def load_rules(self, xml_input):
         """

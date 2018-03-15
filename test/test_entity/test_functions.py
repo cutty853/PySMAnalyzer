@@ -16,7 +16,12 @@ class TestFunction(unittest.TestCase):
         return None
 
     def setUp(self):
-        self.tree = etree.parse("samples/sample.xml")
+        xml_parser = etree.XMLParser(remove_comments=True)
+        self.tree = etree.parse("samples/sample.xml", parser=xml_parser)
+        self.rules_tree = etree.parse(
+            "samples/rules_sample.xml",
+            parser=xml_parser
+        )
         self.test_func = functions.Function(
             r"STV\Trieuse\stv\src\ttpdsext.c", "initttpdsext()"
         )

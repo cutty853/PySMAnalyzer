@@ -53,8 +53,9 @@ def main():  # pragma: no cover
                                  "initttpdsext()")
     my_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
 
-    tree = etree.parse("samples/sample.xml")
-    rules_tree = etree.parse("samples/rules_sample.xml")
+    xml_parser = etree.XMLParser(remove_comments=True)
+    tree = etree.parse("samples/sample.xml", parser=xml_parser)
+    rules_tree = etree.parse("samples/rules_sample.xml", parser=xml_parser)
     my_func.load_metrics(tree)
     my_func.load_rules(rules_tree)
     my_file.load_metrics(tree)
