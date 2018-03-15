@@ -32,11 +32,6 @@ class FunctionNotFound(Exception):
     pass
 
 
-class BadRulesFormat(Exception):
-    """ Raised when a tree is not a rules tree """
-    pass
-
-
 class Function:
     """ Represent source-monitor function object """
 
@@ -81,7 +76,9 @@ class Function:
         try:
             default_rules_tree = default_func_rules_finder(xml_input)[0]
         except IndexError:
-            raise BadRulesFormat("Not a rules tree or a corrupted one !")
+            raise rules_reader.BadRulesFormat(
+                "Not a rules tree or a corrupted one !"
+            )
 
         self.rules = create_function_metrics(default_rules_tree)
 

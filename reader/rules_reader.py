@@ -13,6 +13,11 @@ DEFAULT_FUNCTION_RULES_PATH = "/rules/default/files/function_metrics"
 DEFAULT_FILE_RULES_PATH = "/rules/default/files/metrics"
 
 
+class BadRulesFormat(Exception):
+    """ Raised when a tree is not a rules tree """
+    pass
+
+
 def file_abs_path(source_file):
     return "/rules/specific/files/file[@name='{}']".format(source_file)
 
