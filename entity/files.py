@@ -10,6 +10,7 @@ import reader.smreader as smreader
 import reader.rules_reader as rules_reader
 from . import metrics
 from . import functions
+from lxml import etree
 
 
 def create_file_metrics(file_tree):
@@ -94,3 +95,39 @@ class File:
 
         self.rules = create_file_metrics(default_rules_tree)
 
+    def load_specific_rules(self, xml_input):
+        """ Load the specific rules by modifying the default loaded rules """
+        if not self.rules:
+            self.load_default_rules(xml_input)
+
+        specific_file_rules_finder = rules_reader.specific_file_rules_tree(
+            self.name
+        )
+        try:
+            specific_rules_tree = specific_file_rules_finder(xml_input)[0]
+        except IndexError:
+            # Their is no rules_tree for this file
+            return
+
+        print(etree.tostring(specific_rules_tree[0], pretty_print=True))
+
+        for metric in specific_rules_tree[0]:  # iterate over metrics
+            # skipping comment tag
+            if isinstance(metric.tag, str):
+                print(metric.get("id"), "change by", utils.cast_string(metric.text))
+                self.rules.set(
+                    metric.get("id"),
+                    utils.cast_string(metric.text)
+                )
+
+    def load_rules(self, xml_input):
+        """
+        Description:
+            Load the metrics rules from the xml_input tree (rules tree) by
+            loading default rules, then modifying those default rules with
+            specific rules
+        Arguments:
+            xml_input: the parsed rules xml tree
+        """
+        self.load_default_rules(xml_input)
+        self.load_specific_rules(xml_input)

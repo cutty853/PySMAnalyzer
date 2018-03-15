@@ -59,7 +59,7 @@ def main():  # pragma: no cover
     my_func.load_rules(rules_tree)
     my_file.load_metrics(tree)
     my_file.load_functions(tree)
-    my_file.load_default_rules(rules_tree)
+    my_file.load_rules(rules_tree)
 
     print(my_func.rules)
     print(my_file.rules)
