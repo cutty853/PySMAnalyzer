@@ -50,11 +50,11 @@ class File:
                 str(self.metrics).replace("; ", "\n  ")
         return infos + metrics_string
 
-    def search_func_tree(self, xml_input):
+    def search_file_tree(self, xml_input):
         """ Return the function tree of the file found in the xml_input """
-        func_finder = smreader.create_file_finder(self.name)
+        file_finder = smreader.create_file_finder(self.name)
         try:
-            return func_finder(xml_input)[0]
+            return file_finder(xml_input)[0]
         except IndexError:
             raise FileNotFound("The file doesn't exist !")
 
@@ -67,13 +67,13 @@ class File:
         Arguments:
             xml_input: the source-monitor's xml tree
         """
-        file_tree = self.search_func_tree(xml_input)
+        file_tree = self.search_file_tree(xml_input)
         self.metrics = create_file_metrics(file_tree[0])
 
     def load_functions(self, xml_input):
         """ Load all the functions for the file """
         # Getting the xml tree of the file's functions
-        file_tree = self.search_func_tree(xml_input)
+        file_tree = self.search_file_tree(xml_input)
         functions_tree = file_tree[1]
 
         # Adding each function to the file's function list

@@ -7,6 +7,7 @@
 import unittest
 from lxml import etree
 
+import reader.rules_reader as rules_reader
 import entity.files as files
 
 
@@ -16,11 +17,16 @@ class TestFile(unittest.TestCase):
         return None
 
     def setUp(self):
-        self.tree = etree.parse("samples/sample.xml")
+        xml_parser = etree.XMLParser(remove_comments=True)
+        self.tree = etree.parse("samples/sample.xml", parser=xml_parser)
+        self.rules_tree = etree.parse(
+            "samples/rules_sample.xml", parser=xml_parser
+        )
         self.test_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.c")
 
     def tearDown(self):
         del self.tree
+        del self.rules_tree
         del self.test_file
 
     def test___str__(self):
@@ -40,6 +46,23 @@ class TestFile(unittest.TestCase):
         # Complex string ouput (with metrics)
         self.test_file.load_metrics(self.tree)
         self.assertEqual(str(self.test_file), metrics_final_string)
+
+    def test_search_file_tree(self):
+        """
+            Test for the search_tree method used to search a specific
+            function's tree
+        """
+        my_bad_file = files.File(r"STV\Trieuse\stv\src\kldslkd.c")
+        with self.assertRaises(files.FileNotFound):
+            my_bad_file.search_file_tree(self.tree)
+
+        # We can't test all the equality on the tree (too big)
+        # So we test that it seems to be a source-monitor file tree
+        file_tree = self.test_file.search_file_tree(self.tree)
+        self.assertEqual(len(file_tree), 3)
+        self.assertEqual(file_tree[0].tag, "metrics")
+        self.assertEqual(file_tree[1].tag, "function_metrics")
+        self.assertEqual(file_tree[2].tag, "block_depths")
 
     def test_load_metrics(self):
         """ test the load_metrics method """
@@ -68,17 +91,66 @@ class TestFile(unittest.TestCase):
     def test_load_functions(self):
         """ test for the load_functions method """
         self.test_file.load_functions(self.tree)
-        functions_name = [
-            "initttpdsext()",
-            "majtabpdsext()",
-            "progexplttpdsext()",
-            "proginterttpdsext()",
-            "razttpdsext()",
-            "recuppdsext()"
-        ]
 
+        # All functions are here
+        self.assertNotEqual(self.test_file.functions, None)
         self.assertEqual(len(self.test_file.functions), 6)
         for function in self.test_file.functions:
-            self.assertIn(function.name, functions_name)
-            # Verify that metrics where truely loaded
-            self.assertNotEqual(function.metrics, None)
+            self.assertIn(function.name, {
+                "initttpdsext()", "majtabpdsext()", "progexplttpdsext()",
+                "proginterttpdsext()", "razttpdsext()", "recuppdsext()"
+            })
+            self.assertNotEqual(function.metrics, None)  # metrics are loaded
+
+    def test_load_default_rules(self):
+        """ test for the load_default_rules method """
+        with self.assertRaises(rules_reader.BadRulesFormat):
+            self.test_file.load_default_rules(self.tree)
+
+        self.test_file.load_default_rules(self.rules_tree)
+        self.assertNotEqual(self.test_file.rules, None)
+        self.assertDictEqual(
+            self.test_file.rules._metrics,  # pylint: disable=protected-access
+            {
+                "M0": 0, "M1": 0, "M2": 0, "M3": 0, "M4": 0,
+                "M5": 0, "M6": 0, "M7": 0, "M8": 0, "M9": 0,
+                "M10": 0, "M11": 0, "M12": 0
+            }
+        )
+
+    def test_load_specific_rules(self):
+        """ test for the load_specific_rules method """
+        with self.assertRaises(rules_reader.BadRulesFormat):
+            self.test_file.load_specific_rules(self.tree)
+
+        no_rules_files = files.File(r"STV\Trieuse\stv\src\vcscope.c")
+        no_rules_files.load_specific_rules(self.rules_tree)
+        # Rules did not change from default rules
+        self.assertDictEqual(
+            no_rules_files.rules._metrics,  # pylint: disable=protected-access
+            {
+                "M0": 0, "M1": 0, "M2": 0, "M3": 0, "M4": 0,
+                "M5": 0, "M6": 0, "M7": 0, "M8": 0, "M9": 0,
+                "M10": 0, "M11": 0, "M12": 0
+            }
+        )
+
+        # specific rules
+        self.test_file.load_specific_rules(self.rules_tree)
+        self.assertDictEqual(
+            self.test_file.rules._metrics,  # pylint: disable=protected-access
+            {
+                "M0": "disable", "M1": "disable", "M2": "disable",
+                "M3": "disable", "M4": "disable", "M5": "disable",
+                "M6": "disable", "M7": "disable", "M8": "disable",
+                "M9": "disable", "M10": "disable", "M11": "disable",
+                "M12": "disable"
+            }
+        )
+
+    def test_load_rules(self):
+        """ Test for the load_rules method """
+        self.test_file.load_rules(self.rules_tree)
+
+        # it load something
+        self.assertNotEqual(self.test_file.rules, None)
