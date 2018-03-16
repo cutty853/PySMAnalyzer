@@ -127,3 +127,11 @@ class Function:
         for metric, rule in zip(self.metrics, self.rules):
             if rule != "disable" and metric > rule:
                 self.validity = False
+
+    def load(self, sm_tree, rules_tree):
+        """
+            Load all the function datas
+        """
+        self.load_metrics(sm_tree)
+        self.load_rules(rules_tree)
+        self.check_validity()

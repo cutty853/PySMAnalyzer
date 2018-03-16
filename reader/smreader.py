@@ -36,6 +36,17 @@ def function_abs_path(source_file, function_name):
         "/function_metrics/function[@name='{}']".format(function_name)
 
 
+def all_file_pathfinder():
+    """
+        Return an xpath function used to find the way to the files tree of a
+        source-monitor report.
+
+        >>> path_finder = all_file_pathfinder()
+        >>> path_finder(my_xml)
+    """
+    return etree.XPath(last_checkpoint_abs_path() + "/files")
+
+
 def create_file_finder(filename):
     """
         Return a function that search for the file named 'filename'. The

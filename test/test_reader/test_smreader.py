@@ -37,6 +37,17 @@ class TestFinders(unittest.TestCase):
             "/files/file[@file_name='test_source.c']"
         )
 
+    def test_all_file_pathfinder(self):
+        """ test for the function that create XPath function finder """
+        path_finder = smreader.all_file_pathfinder()
+
+        self.assertIsInstance(path_finder, etree.XPath)
+        self.assertEqual(
+            str(path_finder),
+            "/sourcemonitor_metrics/project/checkpoints/checkpoint[last()]" +
+            "/files"
+        )
+
     def test_create_function_finder(self):
         """ test for the function that create XPath function finder """
         func_finder = smreader.create_function_finder(
