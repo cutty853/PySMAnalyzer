@@ -22,6 +22,9 @@ def center(message, max_line_size):
 
 def cast_string(string):
     """ Convert a string to the implicit type of its content """
+    if not string:
+        return ""
+
     try:
         return int(string)
     except ValueError:

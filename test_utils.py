@@ -40,7 +40,10 @@ class TestUtils(unittest.TestCase):
             float
         """
         # TODO: Do the unit test of the cast_string function !
-        pass
+        self.assertEqual(utils.cast_string(None), "")
+        self.assertEqual(utils.cast_string("12"), 12)
+        self.assertEqual(utils.cast_string("12,53"), 12.53)
+        self.assertEqual(utils.cast_string("bonjour"), "bonjour")
 
 
 def run():

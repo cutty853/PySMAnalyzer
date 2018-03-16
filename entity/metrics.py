@@ -6,6 +6,11 @@
 """
 
 
+def is_metric_treatable(metric):
+    """ Return True if a metric is valid, False if not """
+    return metric and metric != "9+" and metric != "disable"
+
+
 class FileMetrics:
     """ The class represent the metrics of a file """
 
@@ -18,7 +23,8 @@ class FileMetrics:
         )
 
     def __iter__(self):
-        return self._metrics.items().__iter__()
+        for key in sorted(self._metrics, key=lambda x: int(x[1:])):
+            yield key, self._metrics[key]
 
     def get(self, id_name):
         """ Return the value of the metrics named id_name """

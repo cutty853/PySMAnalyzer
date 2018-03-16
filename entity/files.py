@@ -75,7 +75,12 @@ class File:
         """ Load all the functions for the file """
         # Getting the xml tree of the file's functions
         file_tree = self.search_file_tree(xml_input)
-        functions_tree = file_tree[1]
+
+        if file_tree[1].tag == "function_metrics":
+            functions_tree = file_tree[1]
+        else:
+            # handles source files that have no functions (no function_metrics)
+            functions_tree = []
 
         # Adding each function to the file's function list
         for function_tree in functions_tree:
@@ -130,5 +135,7 @@ class File:
             Check if a file is valid according to its rules
         """
         for metric, rule in zip(self.metrics, self.rules):
-            if rule[1] != "disable" and metric[1] > rule[1]:
-                self.validity = False
+            if metrics.is_metric_treatable(metric[1]) and \
+               metrics.is_metric_treatable(rule[1]):
+                if metric[0] == rule[0] and metric[1] > rule[1]:
+                    self.validity = False

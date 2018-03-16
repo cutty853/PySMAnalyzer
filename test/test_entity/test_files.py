@@ -102,6 +102,12 @@ class TestFile(unittest.TestCase):
             })
             self.assertNotEqual(function.metrics, None)  # metrics are loaded
 
+        # a file with no function doesn't have 'function_metrics' block in the
+        # source-monitor report ...
+        header_file = files.File(r"STV\Trieuse\stv\src\ttpdsext.h")
+        header_file.load_functions(self.tree)
+        self.assertEqual(len(header_file.functions), 0)
+
     def test_load_default_rules(self):
         """ test for the load_default_rules method """
         with self.assertRaises(rules_reader.BadRulesFormat):
@@ -113,7 +119,7 @@ class TestFile(unittest.TestCase):
             self.test_file.rules._metrics,  # pylint: disable=protected-access
             {
                 "M0": 0, "M1": 0, "M2": 0, "M3": 0, "M4": 0,
-                "M5": 0, "M6": 0, "M7": 0, "M8": 0, "M9": 0,
+                "M5": 0, "M6": 0, "M7": "disable", "M8": 0, "M9": 0,
                 "M10": 0, "M11": 0, "M12": 0
             }
         )
@@ -130,7 +136,7 @@ class TestFile(unittest.TestCase):
             no_rules_files.rules._metrics,  # pylint: disable=protected-access
             {
                 "M0": 0, "M1": 0, "M2": 0, "M3": 0, "M4": 0,
-                "M5": 0, "M6": 0, "M7": 0, "M8": 0, "M9": 0,
+                "M5": 0, "M6": 0, "M7": "disable", "M8": 0, "M9": 0,
                 "M10": 0, "M11": 0, "M12": 0
             }
         )
