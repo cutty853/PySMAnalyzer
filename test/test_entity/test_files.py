@@ -169,3 +169,13 @@ class TestFile(unittest.TestCase):
 
         # With this rules the file is not ok
         self.assertFalse(self.test_file.validity)
+
+    def test_load(self):
+        """ test for the load method """
+        self.test_file.load(self.tree, self.rules_tree)
+
+        # testing if it has done something
+        # more tests: test_load_metrics, test_load_metrics, test_check_validity
+        self.assertNotEqual(self.test_file.rules, None)
+        self.assertNotEqual(self.test_file.metrics, None)
+        self.assertNotEqual(len(self.test_file.functions), 0)

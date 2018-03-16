@@ -39,3 +39,10 @@ class Analyzer:
             # Finally add it to the files set
             self.files.add(add_file)
 
+    def print_files(self):  # pragma: no cover
+        for file_ in self.files:
+            print("file", file_.name)
+            print(file_.validity)
+            print("functions")
+            for function in file_.functions:
+                print(function.validity)

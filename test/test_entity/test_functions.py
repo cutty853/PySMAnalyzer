@@ -134,3 +134,14 @@ class TestFunction(unittest.TestCase):
 
         self.test_func.check_validity()
         self.assertFalse(self.test_func.validity)
+
+    def test_load(self):
+        """
+            Test the load method, use to load all metrics, rules and check
+            validity of the function
+        """
+        self.test_func.load(self.tree, self.rules_tree)
+        # testing if it has done something
+        # more tests: test_load_metrics, test_load_metrics, test_check_validity
+        self.assertNotEqual(self.test_func.rules, None)
+        self.assertNotEqual(self.test_func.metrics, None)
