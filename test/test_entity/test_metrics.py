@@ -42,6 +42,17 @@ class TestFileMetrics(unittest.TestCase):
             "M10: 9+; M11: 5.51; M12: 17.0"
         self.assertEqual(str(self.test_metrics), metrics_string)
 
+    def test___iter__(self):
+        """ Test for iterator """
+        true_metrics = (
+            ("M0", 461), ("M1", 289), ("M2", 24.6), ("M3", 16.3),
+            ("M4", 6), ("M5", 42.7), ("M6", 88), ("M7", "progexplttpdsext()"),
+            ("M8", 78), ("M9", 328), ("M10", "9+"), ("M11", 5.51),
+            ("M12", 17.0)
+        )
+        for metric, true_metric in zip(self.test_metrics, true_metrics):
+            self.assertTupleEqual(metric, true_metric)
+
     def test_get(self):
         """ Test the get method of FileMetrics object """
         self.assertEqual(self.test_metrics.get("M1"), 289)

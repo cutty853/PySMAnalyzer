@@ -34,7 +34,7 @@
           <metric id="M0">disable</metric>
           <metric id="M1">disable</metric>
           <metric id="M2">disable</metric>
-          <metric id="M3">disable</metric>
+          <metric id="M3">1</metric>
           <metric id="M4">disable</metric>
           <metric id="M5">disable</metric>
           <metric id="M6">disable</metric>

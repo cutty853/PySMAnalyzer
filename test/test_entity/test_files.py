@@ -141,7 +141,7 @@ class TestFile(unittest.TestCase):
             self.test_file.rules._metrics,  # pylint: disable=protected-access
             {
                 "M0": "disable", "M1": "disable", "M2": "disable",
-                "M3": "disable", "M4": "disable", "M5": "disable",
+                "M3": 1, "M4": "disable", "M5": "disable",
                 "M6": "disable", "M7": "disable", "M8": "disable",
                 "M9": "disable", "M10": "disable", "M11": "disable",
                 "M12": "disable"
@@ -154,3 +154,12 @@ class TestFile(unittest.TestCase):
 
         # it load something
         self.assertNotEqual(self.test_file.rules, None)
+
+    def test_check_validity(self):
+        """ Test for the check validity method """
+        self.test_file.load_metrics(self.tree)
+        self.test_file.load_rules(self.rules_tree)
+        self.test_file.check_validity()
+
+        # With this rules the file is not ok
+        self.assertFalse(self.test_file.validity)

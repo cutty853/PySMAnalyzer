@@ -123,3 +123,14 @@ class TestFunction(unittest.TestCase):
         """
         self.test_func.load_rules(self.rules_tree)
         self.assertNotEqual(self.test_func.rules, None)
+
+    def test_check_validity(self):
+        """
+            Test the check_validity method which say if some function's metrics
+            are ok according to rules
+        """
+        self.test_func.load_metrics(self.tree)
+        self.test_func.load_rules(self.rules_tree)
+
+        self.test_func.check_validity()
+        self.assertFalse(self.test_func.validity)
