@@ -50,7 +50,7 @@
             <function name="initttpdsext()">
                 <!-- Comme au dessus seul certain parametre peuvent etre marqué -->
                 <!-- disable metric -->
-                <complexity>disable</complexity>
+                <complexity>5</complexity>
             </function>
         </function_metrics>
 
