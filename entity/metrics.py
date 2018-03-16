@@ -17,6 +17,9 @@ class FileMetrics:
             [id_ + ": " + str(value) for id_, value in self._metrics.items()]
         )
 
+    def __iter__(self):
+        return self._metrics.items().__iter__()
+
     def get(self, id_name):
         """ Return the value of the metrics named id_name """
         return self._metrics[id_name]

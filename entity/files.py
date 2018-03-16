@@ -38,6 +38,7 @@ class File:
         self.name = name
         self.metrics = None
         self.rules = None
+        self.validity = True
         self.functions = set()
 
     def __str__(self):
@@ -122,3 +123,12 @@ class File:
         """
         self.load_default_rules(xml_input)
         self.load_specific_rules(xml_input)
+
+    def check_validity(self):
+        """
+        Description:
+            Check if a file is valid according to its rules
+        """
+        for metric, rule in zip(self.metrics, self.rules):
+            if rule[1] != "disable" and metric[1] > rule[1]:
+                self.validity = False
