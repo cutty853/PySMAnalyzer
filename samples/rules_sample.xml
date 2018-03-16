@@ -19,9 +19,9 @@
       </metrics>
       <function_metrics>
           <complexity>10</complexity>
-          <statements>0</statements>
-          <maximum_depth>0</maximum_depth>
-          <calls>0</calls>
+          <statements>disable</statements>
+          <maximum_depth>disable</maximum_depth>
+          <calls>disable</calls>
       </function_metrics>
     </files>
   </default>

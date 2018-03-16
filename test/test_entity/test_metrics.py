@@ -34,6 +34,13 @@ class TestFileMetrics(unittest.TestCase):
     def tearDown(self):
         del self.test_metrics
 
+    def test_is_metric_treatable(self):
+        """ test for the is_metric_valid function """
+        self.assertTrue(metrics.is_metric_treatable(2))
+        self.assertFalse(metrics.is_metric_treatable("9+"))
+        self.assertFalse(metrics.is_metric_treatable(""))
+        self.assertFalse(metrics.is_metric_treatable("disable"))
+
     def test___str__(self):
         """ String conversion test """
         metrics_string = \

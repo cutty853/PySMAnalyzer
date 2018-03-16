@@ -7,6 +7,8 @@
 """
 
 from lxml import etree
+import reader.smreader as smreader
+import entity.files as files
 
 
 class Analyzer:
@@ -22,4 +24,18 @@ class Analyzer:
 
         # Entity
         self.files = set()
+
+    def load_files(self):
+        """
+            Load all the files of the last source-monitor checkpoint
+        """
+        files_tree = smreader.all_file_pathfinder()(self.sm_tree)[0]
+        for file_tree in files_tree:
+            # Creating the file and loading all his data
+            # print("adding", file_tree.get("file_name"))
+            add_file = files.File(file_tree.get("file_name"))
+            add_file.load(self.sm_tree, self.rules_tree)
+
+            # Finally add it to the files set
+            self.files.add(add_file)
 

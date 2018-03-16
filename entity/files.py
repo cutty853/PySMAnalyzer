@@ -139,3 +139,17 @@ class File:
                metrics.is_metric_treatable(rule[1]):
                 if metric[0] == rule[0] and metric[1] > rule[1]:
                     self.validity = False
+
+    def load(self, sm_tree, rules_tree):
+        """
+            Load all the data of the function
+        """
+        # loading file personnal data
+        self.load_metrics(sm_tree)
+        self.load_rules(rules_tree)
+        self.check_validity()
+
+        # loading functions and their datas
+        self.load_functions(sm_tree)
+        for function in self.functions:
+            function.load(sm_tree, rules_tree)
