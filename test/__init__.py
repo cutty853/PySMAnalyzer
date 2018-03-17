@@ -17,6 +17,7 @@ def run():
     tests.append(test_entity.test_functions_suite)
     tests.append(test_entity.test_files_suite)
     tests.append(test_entity.test_metrics_suite)
+    tests.append(test_entity.test_reports_suite)
 
     tests.append(test_reader.test_smreader_suite)
     tests.append(test_reader.test_rules_reader_suite)

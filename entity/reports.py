@@ -23,7 +23,7 @@ class Report:
         self.nb_bad_functions = 0
         self.nb_bad_functions_for_file = {}
 
-        if files:
+        if files:  # pragma: no cover
             self.make_report(files)
 
     def load_bad_files(self, files):
