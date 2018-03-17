@@ -8,7 +8,7 @@
 """
 
 import argparse
-from utils import center
+from utils import center, colourizer
 import analyzer
 
 
@@ -30,7 +30,9 @@ def options_parser():
 def main():  # pragma: no cover
     """ main du programme. this function is not covered by coverage.py """
     print("*" * FRAME_SIZE)
-    print(center("PySMAnalyzer programmed with love by cutty853", FRAME_SIZE))
+    print(center("PySMAnalyzer programmed with {} by cutty853".format(
+        colourizer.good("love")
+    ), FRAME_SIZE))
     options = options_parser()
 
     if options.test:
@@ -53,6 +55,7 @@ def main():  # pragma: no cover
         "samples/sample.xml", "samples/rules_sample.xml"
     )
     sm_analyzer.load_files()
+    sm_analyzer.print_bad_entities()
 
 
 if __name__ == "__main__":

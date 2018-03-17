@@ -7,6 +7,7 @@
 """
 
 from lxml import etree
+from utils import colourizer
 import reader.smreader as smreader
 import entity.files as files
 
@@ -39,10 +40,20 @@ class Analyzer:
             # Finally add it to the files set
             self.files.add(add_file)
 
-    def print_files(self):  # pragma: no cover
+    def print_bad_entities(self):  # pragma: no cover
+        """ Print all bad function with colors """
         for file_ in self.files:
-            print("file", file_.name)
-            print(file_.validity)
-            print("functions")
+            if not file_.validity:
+                print("File {} has bad metrics".format(
+                    colourizer.color_file(file_.name)
+                ))
+            else:
+                print("File", colourizer.color_file(file_.name))
             for function in file_.functions:
-                print(function.validity)
+                if not function.validity:
+                    print("{} Function {} from {} has bad metrics".format(
+                        colourizer.error("■"),
+                        colourizer.color_function(function.name),
+                        file_.name
+                    ))
+            print()
