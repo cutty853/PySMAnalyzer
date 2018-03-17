@@ -10,6 +10,7 @@ from lxml import etree
 from utils import colourizer, center
 import reader.smreader as smreader
 import entity.files as files
+import entity.reports as reports
 
 
 TITLE_WIDTH = 40
@@ -28,6 +29,7 @@ class Analyzer:
 
         # Entity
         self.files = set()
+        self.report = None
 
     def load_files(self):
         """
@@ -42,6 +44,10 @@ class Analyzer:
 
             # Finally add it to the files set
             self.files.add(add_file)
+
+    def make_report(self):
+        """ loads the report with the files and analyzes previously done """
+        self.report = reports.Report(self.files)
 
     def print_bad_files(self):  # pragma: no cover
         """ print all the bad files """
