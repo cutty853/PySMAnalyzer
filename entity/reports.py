@@ -9,6 +9,8 @@
 # pour print au fur et a mesure à l'écran ou dans un fichier
 
 from utils import colourizer
+import writer.htmlreport as htmlreport
+from lxml import etree
 
 
 class Report:
@@ -27,6 +29,8 @@ class Report:
         self.nb_bad_files = 0
         self.nb_bad_functions = 0
         self.nb_bad_functions_for_file = {}
+
+        self.html_report = htmlreport.HTMLReporter()
 
         if files:  # pragma: no cover
             self.make_report(files)
@@ -94,3 +98,26 @@ class Report:
             ]) + "\n"
             for filename, functions in self.bad_functions.items()
         ])
+
+    def html(self):
+        """ convert the report into html """
+        self.html_report.basic_tree()
+        # self.html_report.link_css()
+
+        self.html_files()
+        self.html_functions()
+
+        with open("test.html", "w") as test_file:
+            test_file.write(self.html_report.convert().decode())
+
+    def html_files(self):
+        """ convert the files' report part into html """
+        for file_ in self.bad_files:
+            self.html_report.add_file(file_.name)
+
+    def html_functions(self):
+        """ convert the functions' report part into html """
+        for filename, functions in self.bad_functions.items():
+            self.html_report.add_file_section(filename)
+            for function in functions:
+                self.html_report.add_function(filename, function.name)

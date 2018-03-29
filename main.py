@@ -57,6 +57,7 @@ def main():  # pragma: no cover
     sm_analyzer.load_files()
     sm_analyzer.make_report()
     sm_analyzer.print_bad_entities()
+    sm_analyzer.report.html()
 
 
 if __name__ == "__main__":
