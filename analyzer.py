@@ -51,27 +51,17 @@ class Analyzer:
 
     def print_bad_files(self):  # pragma: no cover
         """ print all the bad files """
-        for file_ in self.files:
-            if not file_.validity:
-                print("File {} has bad metrics".format(
-                    colourizer.color_file(file_.name)
-                ))
+        if self.report:
+            print(self.report.str_files())
+        else:
+            print("Report is not loaded")
 
     def print_bad_functions(self):  # pragma: no cover
         """ print all the bad functions of each file """
-        for file_ in self.files:
-            if file_.has_bad_functions():
-                print("File", colourizer.color_file(file_.name))
-
-                for function in file_.functions:
-                    if not function.validity:
-                        print("{} Function {} from {} has bad metrics".format(
-                            colourizer.error("■"),
-                            colourizer.color_function(function.name),
-                            file_.name
-                        ))
-
-                print()
+        if self.report:
+            print(self.report.str_functions())
+        else:
+            print("Report is not loaded")
 
     def print_bad_entities(self):  # pragma: no cover
         """ Print all bad function with colors """

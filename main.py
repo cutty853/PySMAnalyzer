@@ -55,8 +55,8 @@ def main():  # pragma: no cover
         "samples/sample.xml", "samples/rules_sample.xml"
     )
     sm_analyzer.load_files()
-    sm_analyzer.print_bad_entities()
     sm_analyzer.make_report()
+    sm_analyzer.print_bad_entities()
 
 
 if __name__ == "__main__":

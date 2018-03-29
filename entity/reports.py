@@ -5,6 +5,11 @@
   Report entity is the entity that contain the report of the analyzer.
 """
 
+# IDEA: Construire le rapport écrit (string ou html) grace a un générateur
+# pour print au fur et a mesure à l'écran ou dans un fichier
+
+from utils import colourizer
+
 
 class Report:
     """docstring for Report."""
@@ -67,3 +72,25 @@ class Report:
         """ Make the report from a set of files """
         self.load_bad_files(files)
         self.load_bad_functions(files)
+
+    def str_files(self):
+        """ convert the files' report part into string """
+        return "\n".join([
+            "File {} has bad metrics".format(colourizer.color_file(file_.name))
+            for file_ in self.bad_files
+        ])
+
+    def str_functions(self):
+        """ convert the functions's report part into string """
+        return "".join([
+            "File {}\n".format(colourizer.color_file(filename)) +
+            "".join([
+                "{} Function {} from {} has bad metrics\n".format(
+                    colourizer.error("■"),
+                    colourizer.color_function(function.name),
+                    filename
+                )
+                for function in functions
+            ]) + "\n"
+            for filename, functions in self.bad_functions.items()
+        ])
