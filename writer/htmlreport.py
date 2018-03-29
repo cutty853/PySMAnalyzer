@@ -51,7 +51,7 @@ class HTMLReporter:
 
     def link_css(self):
         """ add a css sttylesheet to the html document """
-        self.html_tree.find(".//head").append(etree.HTML(
+        self.html_tree.find(".//head").append(etree.XML(
             "<link rel='stylesheet' href='" + BULMA_CSS_LINK + "' />"
         ))
 
