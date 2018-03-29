@@ -20,6 +20,11 @@ BASIC_FILE_SECTION_FMT = "<div class='{0}'><h3>{0}</h3></div>"
 BASIC_FUNCTION_FMT = "<p>- {0} has bad metrics</p>"
 
 
+class NoSection(IndexError):
+    """ raised when no section file was found for a function """
+    pass
+
+
 class HTMLReporter:
     """ The html reporter is able to write the analyzer's report in html """
     def __init__(self):
@@ -28,7 +33,6 @@ class HTMLReporter:
     def convert(self):
         """ convert the html report to bytes string """
         return etree.tostring(self.html_tree, pretty_print=True)
-
 
     def basic_tree(self):
         """ Create a basic tree for the html report """
@@ -72,6 +76,9 @@ class HTMLReporter:
         bad_function_tree = self.html_tree.find(
             BAD_FUNCTION_SECTION_PATH.format(file_section_name)
         )
+        if bad_function_tree is None:
+            raise NoSection("There is no file section for this function")
+
         bad_function_tree.append(etree.XML(
             BASIC_FUNCTION_FMT.format(funcname)
         ))
