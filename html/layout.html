@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+    <head>
+        <meta charset="utf-8">
+        <title>PySMAnalyzer Report</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+        <style media="screen">
+            .logo {
+                margin: 0 1em 0 0;
+            }
+            .symbol {
+                float: left;
+                margin-right: 1em;
+                margin-top: 0.5em;
+            }
+        </style>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar is-light">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://bulma.io">
+                    <img src="images/terminal.svg" class="logo">
+                    PySMAnalyzer Report
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="#">Home</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link" href="#">Entities</a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="#badFiles">Files</a>
+                            <a class="navbar-item" href="#badFunctions">Functions</a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="#">Default Rules</a>
+                            <a class="navbar-item" href="#">Applicable Rules</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                  <p class="control">
+                    <a class="button is-primary" href="https://github.com/cutty853/PySMAnalyzer">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>PySMA on Github</span>
+                    </a>
+                  </p>
+              </div>
+            </div>
+        </nav>
+        <br><br>
+        <div class="container is-spaced is-widescreen" id="entityInfos">
+            <div class="columns">
+                <!-- Maximum size is 12 -->
+                <div class="column is-one-third">
+                    <div class="box" id="function">
+                        <img class="image is-32x32 symbol" src="images/func.svg" alt="function symbol">
+                        <p class="title">Bad functions</p>
+                        There are 36 bad functions !
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="box" id="file">
+                        <img class="image is-32x32 symbol" src="images/file.svg" alt="file symbol" >
+                        <p class="title">Bad files</p>
+                        There are 2 bad files
+                    </div>
+                </div>
+                <div class="column is-one-third">
+                    <div class="box" id="worst_file">
+                        <img class="image is-32x32 symbol" src="images/func_in_file.svg" alt="in file function symbol">
+                        <p class="title">Worst files</p>
+                        The files with the most bad functions is expl.c
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="container is-widescreen">
+            <h1 class="title">Functions</h1>
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Bad functions
+                    </p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </header>
+                <div class="card-content">
+                    <div class="content" id="badFunctions">
+                        <!-- Here are placed all the bad functions for each file -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="container is-widescreen">
+            <h1 class="title">Files</h1>
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Bad files
+                    </p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </header>
+                <div class="card-content">
+                    <div class="content" id="badFiles">
+                        <!-- Here are placed all the bad files -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </body>
+
+</html>
