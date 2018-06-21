@@ -11,13 +11,27 @@ from lxml import etree
 BULMA_LINK = "https://cdnjs.cloudflare.com/ajax/libs/bulma/"
 BULMA_CSS_LINK = BULMA_LINK + "0.6.2/css/bulma.min.css"
 
-BAD_FILES_SECTION_PATH = ".//body/div[@class='badFiles']"
-BAD_FUNCTIONS_SECTION_PATH = ".//body/div[@class='badFunctions']"
-BAD_FUNCTION_SECTION_PATH = BAD_FUNCTIONS_SECTION_PATH + "/div[@class='{0}']"
+BAD_FILES_SECTION_PATH = ".//body/div/div/div/div[@id='badFiles']/table/tbody"
+BAD_FUNCTIONS_SECTION_PATH = ".//body/div/div/div/div[@id='badFunctions']"
+BAD_FUNCTION_SECTION_PATH = BAD_FUNCTIONS_SECTION_PATH + "/div[@class='{0}']/table/tbody"
 
-BASIC_FILE_FMT = "<p>- {0} has bad metrics</p>"
-BASIC_FILE_SECTION_FMT = "<div class='{0}'><h3>{0}</h3></div>"
-BASIC_FUNCTION_FMT = "<p>- {0} has bad metrics</p>"
+TABLE_HTML = """
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Function name</th>
+            <th>Problem's description</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+"""
+BASIC_FILE_FMT = "<tr><td>{0}</td><td>has bad metrics</td></tr>"
+BASIC_FILE_SECTION_FMT = "<div class='{0}'><h3 class='title has-text-primary'>{0}</h3>" + TABLE_HTML + "</div>"
+BASIC_FUNCTION_FMT = "<tr><td>{0}</td><td>has bad metrics</td></tr>"
+
+LOGO_PATH = "images/terminal.svg"
 
 
 class NoSection(IndexError):
@@ -30,34 +44,14 @@ class HTMLReporter:
     def __init__(self):
         self.html_tree = None
 
+    def load_layout(self):
+        """ Load the existing html layout """
+        html_parser = etree.HTMLParser(remove_comments=True)
+        self.html_tree = etree.parse("html/layout.html", parser=html_parser)
+
     def convert(self):
         """ convert the html report to bytes string """
-        return etree.tostring(self.html_tree, pretty_print=True)
-
-    def basic_tree(self):
-        """ Create a basic tree for the html report """
-        self.html_tree = builder.HTML(
-            builder.HEAD(
-                builder.TITLE("PySMAnalyzer Report")
-            ),
-            builder.BODY(
-                builder.H1("PySMAnalyzer Report"),
-                builder.DIV(
-                    builder.CLASS("badFiles"),
-                    builder.H2("Bad files")
-                ),
-                builder.DIV(
-                    builder.CLASS("badFunctions"),
-                    builder.H2("Bad functions per file")
-                )
-            )
-        )
-
-    def link_css(self):
-        """ add a css sttylesheet to the html document """
-        self.html_tree.find(".//head").append(etree.XML(
-            "<link rel='stylesheet' href='" + BULMA_CSS_LINK + "' />"
-        ))
+        return etree.tostring(self.html_tree, pretty_print=True, method='html')
 
     def add_file(self, filename):
         """ add a bad file into bad files section into the html tree"""

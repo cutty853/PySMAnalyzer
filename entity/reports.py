@@ -10,7 +10,6 @@
 
 from utils import colourizer
 import writer.htmlreport as htmlreport
-from lxml import etree
 
 
 class Report:
@@ -101,13 +100,12 @@ class Report:
 
     def html(self):
         """ convert the report into html """
-        self.html_report.basic_tree()
-        # self.html_report.link_css()
+        self.html_report.load_layout()
 
         self.html_files()
         self.html_functions()
 
-        with open("test.html", "w") as test_file:
+        with open("html/test.html", "w") as test_file:
             test_file.write(self.html_report.convert().decode())
 
     def html_files(self):

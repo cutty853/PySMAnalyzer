@@ -7,7 +7,7 @@
 """
 
 from lxml import etree
-from utils import colourizer, center
+from utils import center
 import reader.smreader as smreader
 import entity.files as files
 import entity.reports as reports
