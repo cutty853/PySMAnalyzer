@@ -76,6 +76,12 @@ class Report:
         self.load_bad_files(files)
         self.load_bad_functions(files)
 
+    def worst_file_name(self):
+        # TODO: Trouver et tester la méthode la plus efficace (test d'implémentation ou fonctionnel)
+        v = list(self.nb_bad_functions_for_file.values())
+        k = list(self.nb_bad_functions_for_file.keys())
+        return k[v.index(max(v))]
+
     ###########################################################################
     #                           STRING CONVERSION                             #
     ###########################################################################
@@ -112,9 +118,16 @@ class Report:
 
         self.html_files()
         self.html_functions()
+        self.html_infos()
 
         with open("html/test.html", "w") as test_file:
             test_file.write(self.html_report.convert().decode())
+
+    def html_infos(self):
+        """ convert the report's infos part into html """
+        self.html_report.change_bad_files_amount(self.nb_bad_files)
+        self.html_report.change_bad_functions_amount(self.nb_bad_functions)
+        self.html_report.change_worst_file_name(self.worst_file_name())
 
     def html_files(self):
         """ convert the files' report part into html """
