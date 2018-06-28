@@ -9,6 +9,8 @@ import unittest
 from . import test_entity
 from . import test_reader
 from . import test_writer
+from . import test_utils
+from . import test_analyzer
 
 
 def run():
@@ -24,6 +26,10 @@ def run():
     tests.append(test_reader.test_rules_reader_suite)
 
     tests.append(test_writer.test_htmlreport_suite)
+
+    tests.append(test_utils.create_test_suite())
+
+    tests.append(test_analyzer.create_test_suite())
 
     # Define the final TestSuite
     test_suite = unittest.TestSuite(tests)

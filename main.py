@@ -37,16 +37,16 @@ def main():  # pragma: no cover
 
     if options.test:
         import test
-        import test_utils
-        import test_analyzer
+        # import test_utils
+        # import test_analyzer
         import sys
 
         print(center("Loading all the unit-test of the project", FRAME_SIZE))
         print("*" * FRAME_SIZE)
 
         test.run()
-        test_utils.run()
-        test_analyzer.run()
+        # test_utils.run()
+        # test_analyzer.run()
         sys.exit(0)
 
     print("*" * FRAME_SIZE, "\n")
