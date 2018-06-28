@@ -37,10 +37,10 @@ class TestReport(unittest.TestCase):
     def tearDown(self):
         del self.test_report
 
-    def test_new_bad_function(self):
-        """ test the new_bad_function method """
+    def test_new_bad_functions(self):
+        """ test the new_bad_functions method """
         report = self.test_report
-        report.new_bad_function("test_file.c")
+        report.new_bad_functions("test_file.c")
 
         self.assertSetEqual(report.bad_functions["test_file.c"], set())
         self.assertEqual(report.nb_bad_functions, 0)

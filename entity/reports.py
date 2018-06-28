@@ -41,7 +41,7 @@ class Report:
                 self.bad_files.add(file_)
                 self.nb_bad_files += 1
 
-    def new_bad_function(self, filename):
+    def new_bad_functions(self, filename):
         """ decalre a new set of bad functions for a file """
         self.bad_functions[filename] = set()
         self.nb_bad_functions_for_file[filename] = 0
@@ -50,11 +50,11 @@ class Report:
         """ add a bad function to the bad_functions dict """
         try:
             self.bad_functions[function.source_file].add(function)
-            self.nb_bad_functions += 1
             self.nb_bad_functions_for_file[function.source_file] += 1
+            self.nb_bad_functions += 1
         except KeyError:
             # entry was not initialised
-            self.new_bad_function(function.source_file)
+            self.new_bad_functions(function.source_file)
             # Retry
             self.add_bad_function(function)
 
@@ -65,7 +65,7 @@ class Report:
         """
         for file_ in files:
             if file_.has_bad_functions():
-                self.new_bad_function(file_.name)
+                self.new_bad_functions(file_.name)
 
                 for function in file_.functions:
                     if not function.validity:
@@ -75,6 +75,10 @@ class Report:
         """ Make the report from a set of files """
         self.load_bad_files(files)
         self.load_bad_functions(files)
+
+    ###########################################################################
+    #                           STRING CONVERSION                             #
+    ###########################################################################
 
     def str_files(self):
         """ convert the files' report part into string """
@@ -97,6 +101,10 @@ class Report:
             ]) + "\n"
             for filename, functions in self.bad_functions.items()
         ])
+
+    ###########################################################################
+    #                            HTML CONVERSION                              #
+    ###########################################################################
 
     def html(self):
         """ convert the report into html """
