@@ -10,6 +10,7 @@
 
 from utils import colourizer
 import writer.htmlreport as htmlreport
+import writer.xmlreport as xmlreport
 
 
 class Report:
@@ -30,6 +31,7 @@ class Report:
         self.nb_bad_functions_for_file = {}
 
         self.html_report = htmlreport.HTMLReporter()
+        self.xml_report = xmlreport.XMLReporter()
 
         if files:  # pragma: no cover
             self.make_report(files)
@@ -120,8 +122,7 @@ class Report:
         self.html_functions()
         self.html_infos()
 
-        with open("html/test.html", "w") as test_file:
-            test_file.write(self.html_report.convert().decode())
+        return self.html_report.convert().decode()
 
     def html_infos(self):
         """ convert the report's infos part into html """
@@ -140,3 +141,29 @@ class Report:
             self.html_report.add_file_section(filename)
             for function in functions:
                 self.html_report.add_function(filename, function.name)
+
+    ###########################################################################
+    #                             XML CONVERSION                              #
+    ###########################################################################
+
+    # TODO: Extract a converter methods from the html and the xml converter
+
+    def xml(self):
+        self.xml_report.load_layout()
+
+        self.xml_files()
+        self.xml_functions()
+
+        return self.xml_report.convert().decode()
+
+    def xml_files(self):
+        """ convert the files' report part into html """
+        for file_ in self.bad_files:
+            self.xml_report.add_file(file_.name)
+
+    def xml_functions(self):
+        """ convert the functions' report part into html """
+        for filename, functions in self.bad_functions.items():
+            self.xml_report.add_file_section(filename)
+            for function in functions:
+                self.xml_report.add_function(filename, function.name)

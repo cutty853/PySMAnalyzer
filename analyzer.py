@@ -14,6 +14,8 @@ import entity.reports as reports
 
 
 TITLE_WIDTH = 40
+HTML_BASE_DIRECTORY = "html/"
+XML_BASE_DIRECTORY = "./"
 
 
 class Analyzer:
@@ -48,6 +50,17 @@ class Analyzer:
     def make_report(self):
         """ loads the report with the files and analyzes previously done """
         self.report = reports.Report(self.files)
+
+    def save_report(self, file_name, method="html"):
+        """ save the report into the asked file """
+        if method == "html":
+            with open(HTML_BASE_DIRECTORY + file_name, "w") as html_output:
+                html_output.write(self.report.html())
+        elif method == "xml":
+            with open(XML_BASE_DIRECTORY + file_name, "w") as xml_output:
+                xml_output.write(self.report.xml())
+        else:
+            raise ValueError("method must be html or xml")
 
     def print_bad_files(self):  # pragma: no cover
         """ print all the bad files """
