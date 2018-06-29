@@ -28,8 +28,8 @@ def options_parser():
                         help="The output file")
     parser.add_argument("-f", "--fomat", dest="format", default="html",
                         help="output format, default: html")
-    parser.add_argument("input", help="source monitor input file")
-    parser.add_argument("rules", help="rules file")
+    parser.add_argument("input", help="source monitor input file", nargs="?")
+    parser.add_argument("rules", help="rules file", nargs="?")
 
     return parser.parse_args()
 
@@ -54,10 +54,15 @@ def main():  # pragma: no cover
 
     print("*" * FRAME_SIZE, "\n")
 
+    if not options.input or not options.rules:
+        import sys
+        print("You must provide a input file and a rules file\nExitting")
+        sys.exit(1)
     if options.format not in {"html", "xml"}:
         import sys
         print("You must provide a supported format (html or xml)\nExitting")
         sys.exit(1)
+
 
     sm_analyzer = analyzer.Analyzer(options.input, options.rules)
     sm_analyzer.load_files()
