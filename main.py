@@ -44,10 +44,8 @@ def main():  # pragma: no cover
         print(center("Loading all the unit-test of the project", FRAME_SIZE))
         print("*" * FRAME_SIZE)
 
-        test.run()
-        # test_utils.run()
-        # test_analyzer.run()
-        sys.exit(0)
+        result = test.run()
+        sys.exit(not result)
 
     print("*" * FRAME_SIZE, "\n")
 

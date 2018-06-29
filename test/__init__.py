@@ -14,7 +14,10 @@ from . import test_analyzer
 
 
 def run():
-    """ Runner of the test suite """
+    """
+        Runner of the test suite, return True if the test was successful,
+        False if not
+    """
     # List all the TestCase to import in the test suite
     tests = []
     tests.append(test_entity.test_functions_suite)
@@ -35,4 +38,10 @@ def run():
     test_suite = unittest.TestSuite(tests)
 
     test_runner = unittest.TextTestRunner(verbosity=2)
-    test_runner.run(test_suite)
+    result = test_runner.run(test_suite)
+
+    return result.wasSuccessful()
+
+
+def was_successful():
+    return
