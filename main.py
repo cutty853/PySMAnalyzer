@@ -24,6 +24,13 @@ def options_parser():
     parser.add_argument("-t", "--test", dest="test", action="store_true",
                         help="Start all the unit-test of the project")
 
+    parser.add_argument("-o", "--output", dest="output",
+                        help="The output file")
+    parser.add_argument("-f", "--fomat", dest="format", default="html",
+                        help="output format, default: html")
+    parser.add_argument("input", help="source monitor input file", nargs="?")
+    parser.add_argument("rules", help="rules file", nargs="?")
+
     return parser.parse_args()
 
 
@@ -37,25 +44,31 @@ def main():  # pragma: no cover
 
     if options.test:
         import test
-        import test_utils
-        import test_analyzer
         import sys
 
         print(center("Loading all the unit-test of the project", FRAME_SIZE))
         print("*" * FRAME_SIZE)
 
-        test.run()
-        test_utils.run()
-        test_analyzer.run()
-        sys.exit(0)
+        result = test.run()
+        sys.exit(not result)
 
     print("*" * FRAME_SIZE, "\n")
 
-    sm_analyzer = analyzer.Analyzer(
-        "samples/sample.xml", "samples/rules_sample.xml"
-    )
+    if not options.input or not options.rules:
+        import sys
+        print("You must provide a input file and a rules file\nExitting")
+        sys.exit(1)
+    if options.format not in {"html", "xml"}:
+        import sys
+        print("You must provide a supported format (html or xml)\nExitting")
+        sys.exit(1)
+
+
+    sm_analyzer = analyzer.Analyzer(options.input, options.rules)
     sm_analyzer.load_files()
+    sm_analyzer.make_report()
     sm_analyzer.print_bad_entities()
+    sm_analyzer.save_report(options.output, method=options.format)
 
 
 if __name__ == "__main__":

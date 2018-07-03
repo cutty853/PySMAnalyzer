@@ -52,7 +52,6 @@ class TestAnalyzer(unittest.TestCase):
         # see test_functions.py, test_files.py, test_metrics.py
 
 
-def run():
+def create_test_suite():
     """ main du programme """
-    test_suite = unittest.TestLoader().loadTestsFromTestCase(TestAnalyzer)
-    unittest.TextTestRunner(verbosity=2).run(test_suite)
+    return unittest.TestLoader().loadTestsFromTestCase(TestAnalyzer)

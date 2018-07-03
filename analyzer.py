@@ -7,9 +7,15 @@
 """
 
 from lxml import etree
-from utils import colourizer
+from utils import center
 import reader.smreader as smreader
 import entity.files as files
+import entity.reports as reports
+
+
+TITLE_WIDTH = 40
+HTML_BASE_DIRECTORY = "html/"
+XML_BASE_DIRECTORY = "./"
 
 
 class Analyzer:
@@ -25,6 +31,7 @@ class Analyzer:
 
         # Entity
         self.files = set()
+        self.report = None
 
     def load_files(self):
         """
@@ -40,20 +47,44 @@ class Analyzer:
             # Finally add it to the files set
             self.files.add(add_file)
 
+    def make_report(self):
+        """ loads the report with the files and analyzes previously done """
+        self.report = reports.Report(self.files)
+
+    def save_report(self, file_name, method="html"):
+        """ save the report into the asked file """
+        if method == "html":
+            with open(HTML_BASE_DIRECTORY + file_name, "w") as html_output:
+                html_output.write(self.report.html())
+        elif method == "xml":
+            with open(XML_BASE_DIRECTORY + file_name, "w") as xml_output:
+                xml_output.write(self.report.xml())
+        else:
+            raise ValueError("method must be html or xml")
+
+    def print_bad_files(self):  # pragma: no cover
+        """ print all the bad files """
+        if self.report:
+            print(self.report.str_files())
+        else:
+            print("Report is not loaded")
+
+    def print_bad_functions(self):  # pragma: no cover
+        """ print all the bad functions of each file """
+        if self.report:
+            print(self.report.str_functions())
+        else:
+            print("Report is not loaded")
+
     def print_bad_entities(self):  # pragma: no cover
         """ Print all bad function with colors """
-        for file_ in self.files:
-            if not file_.validity:
-                print("File {} has bad metrics".format(
-                    colourizer.color_file(file_.name)
-                ))
-            else:
-                print("File", colourizer.color_file(file_.name))
-            for function in file_.functions:
-                if not function.validity:
-                    print("{} Function {} from {} has bad metrics".format(
-                        colourizer.error("■"),
-                        colourizer.color_function(function.name),
-                        file_.name
-                    ))
-            print()
+        print("-" * TITLE_WIDTH)
+        print(center("Bad files", TITLE_WIDTH))
+        print("-" * TITLE_WIDTH)
+        self.print_bad_files()
+        print("\n\n", end='')
+
+        print("-" * TITLE_WIDTH)
+        print(center("Bad functions", TITLE_WIDTH))
+        print("-" * TITLE_WIDTH)
+        self.print_bad_functions()

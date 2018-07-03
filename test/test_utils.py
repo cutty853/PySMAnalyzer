@@ -46,7 +46,6 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(utils.cast_string("bonjour"), "bonjour")
 
 
-def run():
+def create_test_suite():
     """ main du programme """
-    test_suite = unittest.TestLoader().loadTestsFromTestCase(TestUtils)
-    unittest.TextTestRunner(verbosity=2).run(test_suite)
+    return unittest.TestLoader().loadTestsFromTestCase(TestUtils)

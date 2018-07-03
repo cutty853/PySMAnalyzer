@@ -140,6 +140,14 @@ class File:
                 if metric[0] == rule[0] and metric[1] > rule[1]:
                     self.validity = False
 
+    def has_bad_functions(self):
+        """ Return True if the file has (a) bad function(s) """
+        for function in self.functions:
+            if not function.validity:
+                return True
+
+        return False
+
     def load(self, sm_tree, rules_tree):
         """
             Load all the data of the function
