@@ -15,7 +15,7 @@ import analyzer
 FRAME_SIZE = 70
 
 
-def options_parser():
+def define_parser():
     """
         Parse the command line options. Return the an object containing all
         the options and their value
@@ -31,7 +31,7 @@ def options_parser():
     parser.add_argument("input", help="source monitor input file", nargs="?")
     parser.add_argument("rules", help="rules file", nargs="?")
 
-    return parser.parse_args()
+    return parser
 
 
 def main():  # pragma: no cover
@@ -40,7 +40,8 @@ def main():  # pragma: no cover
     print(center("PySMAnalyzer programmed with {} by cutty853".format(
         colourizer.good("love")
     ), FRAME_SIZE))
-    options = options_parser()
+    parser = define_parser()
+    options = parser.parse_args()
 
     if options.test:
         import test
@@ -56,11 +57,15 @@ def main():  # pragma: no cover
 
     if not options.input or not options.rules:
         import sys
-        print("You must provide a input file and a rules file\nExitting")
+        print("You must provide a input file and a rules file")
+        print("-" * FRAME_SIZE)
+        parser.print_help()
         sys.exit(1)
     if options.format not in {"html", "xml"}:
         import sys
-        print("You must provide a supported format (html or xml)\nExitting")
+        print("You must provide a supported format (html or xml)")
+        print("-" * FRAME_SIZE)
+        parser.print_help()
         sys.exit(1)
 
 
