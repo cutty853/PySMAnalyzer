@@ -1,0 +1,1 @@
+# HOWTO: create rules file
