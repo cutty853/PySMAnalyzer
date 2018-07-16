@@ -60,7 +60,7 @@ The report has two behavior.
 1. **Specify files set at initialisation:** If you specify all the files (all the `File` object extracted from a source monitor report) at initialisation, the report will be able to load itself (take out all the non valide `File` and `Function` object of the files set). You will then be able to directly convert the report into html or xml.
 2. **Init the report and fill it later:** If you specify the files set after creating a report object, you will have to load the report by calling the `Report.make_report` before using it or converting it.
 
-## Software parts
+## Other software parts
 Beyond the use of different entity (object), the program also use packages to divide up the code.  
 
 ### reader
