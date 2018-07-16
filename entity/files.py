@@ -39,6 +39,7 @@ class File:
         self.metrics = None
         self.rules = None
         self.validity = True
+        self.non_valid_metrics = set()
         self.functions = set()
 
     def __str__(self):
@@ -137,8 +138,10 @@ class File:
         for metric, rule in zip(self.metrics, self.rules):
             if metrics.is_metric_treatable(metric[1]) and \
                metrics.is_metric_treatable(rule[1]):
+                # NOTE: work because all rules are loaded
                 if metric[0] == rule[0] and metric[1] > rule[1]:
                     self.validity = False
+                    self.non_valid_metrics.add(metric[0])
 
     def has_bad_functions(self):
         """ Return True if the file has (a) bad function(s) """

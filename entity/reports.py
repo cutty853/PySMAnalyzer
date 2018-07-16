@@ -11,6 +11,7 @@
 from utils import colourizer
 import writer.htmlreport as htmlreport
 import writer.xmlreport as xmlreport
+from entity.metrics import FunctionMetrics, FileMetrics
 
 
 class Report:
@@ -25,7 +26,15 @@ class Report:
             with checked validity
         """
         self.bad_files = set()
+        # {"bonjour.c": set("hello()", "au_revoir()")}
         self.bad_functions = {}
+        # {
+        #     "bonjour.c": {
+        #         "hello()": FunctionMetrics(),
+        #         "au_revoir()": FunctionMetrics()
+        #     }
+        # }
+        self.bad_functions_metrics = {}
         self.nb_bad_files = 0
         self.nb_bad_functions = 0
         self.nb_bad_functions_for_file = {}
@@ -46,17 +55,29 @@ class Report:
     def new_bad_functions(self, filename):
         """ decalre a new set of bad functions for a file """
         self.bad_functions[filename] = set()
+        self.bad_functions_metrics[filename] = dict()
         self.nb_bad_functions_for_file[filename] = 0
 
     def add_bad_function(self, function):
         """ add a bad function to the bad_functions dict """
+        def is_valid(metric_name):
+            """ check if a function metrics is valid """
+            return metric_name in function.non_valid_metrics
+
+        filename = function.source_file
         try:
-            self.bad_functions[function.source_file].add(function)
-            self.nb_bad_functions_for_file[function.source_file] += 1
+            self.bad_functions[filename].add(function)
+            self.bad_functions_metrics[filename][function.name] = FunctionMetrics(
+                complexity=is_valid("complexity"),
+                statements=is_valid("statements"),
+                maximum_depth=is_valid("maximum_depth"),
+                calls=is_valid("calls")
+            )
+            self.nb_bad_functions_for_file[filename] += 1
             self.nb_bad_functions += 1
         except KeyError:
             # entry was not initialised
-            self.new_bad_functions(function.source_file)
+            self.new_bad_functions(filename)
             # Retry
             self.add_bad_function(function)
 
@@ -90,8 +111,12 @@ class Report:
 
     def str_files(self):
         """ convert the files' report part into string """
+        # TODO: Load file metrics names correspondance
         return "\n".join([
-            "File {} has bad metrics".format(colourizer.color_file(file_.name))
+            "File {} has bad metrics ({})".format(
+                colourizer.color_file(file_.name),
+                file_.non_valid_metrics
+            )
             for file_ in self.bad_files
         ])
 
@@ -100,10 +125,11 @@ class Report:
         return "".join([
             "File {}\n".format(colourizer.color_file(filename)) +
             "".join([
-                "{} Function {} from {} has bad metrics\n".format(
+                "{} Function {} from {} has bad metrics ({})\n".format(
                     colourizer.error("■"),
                     colourizer.color_function(function.name),
-                    filename
+                    filename,
+                    function.non_valid_metrics
                 )
                 for function in functions
             ]) + "\n"

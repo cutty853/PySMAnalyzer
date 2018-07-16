@@ -41,6 +41,7 @@ class Function:
         self.metrics = None
         self.rules = None
         self.validity = True
+        self.non_valid_metrics = set()
 
     def __str__(self):
         infos = "Function called {} in {}".format(self.name, self.source_file)
@@ -124,9 +125,16 @@ class Function:
         Description:
             Check if a function is valid according to its rules
         """
-        for metric, rule in zip(self.metrics, self.rules):
-            if rule != "disable" and metric > rule:
+        # HACK: need to change the way FunctionMetrics works
+        metrics_names = ("complexity", "statements", "maximum_depth", "calls")
+        metrics = list()
+        for metric, name in zip(self.metrics, metrics_names):
+            metrics.append((name, metric))
+
+        for metric, rule in zip(metrics, self.rules):
+            if rule != "disable" and metric[1] > rule:
                 self.validity = False
+                self.non_valid_metrics.add(metric[0])  # add metric name
 
     def load(self, sm_tree, rules_tree):
         """
