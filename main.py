@@ -68,12 +68,12 @@ def main():  # pragma: no cover
         parser.print_help()
         sys.exit(1)
 
-
     sm_analyzer = analyzer.Analyzer(options.input, options.rules)
     sm_analyzer.load_files()
     sm_analyzer.make_report()
     sm_analyzer.print_bad_entities()
-    sm_analyzer.save_report(options.output, method=options.format)
+    if options.output:
+        sm_analyzer.save_report(options.output, method=options.format)
 
 
 if __name__ == "__main__":
