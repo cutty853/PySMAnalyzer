@@ -32,9 +32,9 @@ TABLE_HTML = """
     </tbody>
 </table>
 """
-BASIC_FILE_FMT = "<tr><td>{0}</td><td>has bad metrics</td></tr>"
+BASIC_FILE_FMT = "<tr><td>{0}</td><td>bad {1}</td></tr>"
 BASIC_FILE_SECTION_FMT = "<div class='{0}'><h3 class='title has-text-primary'>{0}</h3>" + TABLE_HTML + "</div>"
-BASIC_FUNCTION_FMT = "<tr><td>{0}</td><td>has bad metrics</td></tr>"
+BASIC_FUNCTION_FMT = "<tr><td>{0}</td><td>bad {1}</td></tr>"
 BASIC_BAD_FILES_INFOBOX_FMT = "<p>There are {0} bad files</p>"
 BASIC_BAD_FUNCTIONS_INFOBOX_FMT = "<p>There are {0} bad functions !</p>"
 BASIC_WORST_FILE_INFOBOX_FMT = "<p>The file with the most bad functions is {0}</p>"
@@ -76,10 +76,12 @@ class HTMLReporter:
         worst_file_infobox = self.html_tree.find(WORST_FILE_INFO_BOX)
         worst_file_infobox.append(etree.XML(BASIC_WORST_FILE_INFOBOX_FMT.format(new_name)))
 
-    def add_file(self, filename):
+    def add_file(self, filename, non_valid_metrics):
         """ add a bad file into bad files section into the html tree"""
         bad_files_tree = self.html_tree.find(BAD_FILES_SECTION_PATH)
-        bad_files_tree.append(etree.XML(BASIC_FILE_FMT.format(filename)))
+        bad_files_tree.append(etree.XML(BASIC_FILE_FMT.format(
+            filename, ", bad ".join(non_valid_metrics)
+        )))
 
     def add_file_section(self, section_name):
         """ add a section to the bad files section """
@@ -88,7 +90,7 @@ class HTMLReporter:
             BASIC_FILE_SECTION_FMT.format(section_name)
         ))
 
-    def add_function(self, file_section_name, funcname):
+    def add_function(self, file_section_name, funcname, non_valid_metrics):
         """ add a bad function in its file section into the html tree """
         bad_function_tree = self.html_tree.find(
             BAD_FUNCTION_SECTION_PATH.format(file_section_name)
@@ -96,6 +98,6 @@ class HTMLReporter:
         if bad_function_tree is None:
             raise NoSection("There is no file section for this function")
 
-        bad_function_tree.append(etree.XML(
-            BASIC_FUNCTION_FMT.format(funcname)
-        ))
+        bad_function_tree.append(etree.XML(BASIC_FUNCTION_FMT.format(
+            funcname, ", bad ".join(non_valid_metrics)
+        )))

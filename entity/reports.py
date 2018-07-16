@@ -159,14 +159,16 @@ class Report:
     def html_files(self):
         """ convert the files' report part into html """
         for file_ in self.bad_files:
-            self.html_report.add_file(file_.name)
+            self.html_report.add_file(file_.name, file_.non_valid_metrics)
 
     def html_functions(self):
         """ convert the functions' report part into html """
         for filename, functions in self.bad_functions.items():
             self.html_report.add_file_section(filename)
             for function in functions:
-                self.html_report.add_function(filename, function.name)
+                self.html_report.add_function(
+                    filename, function.name, function.non_valid_metrics
+                )
 
     ###########################################################################
     #                             XML CONVERSION                              #

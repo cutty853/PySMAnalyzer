@@ -19,7 +19,7 @@
       </metrics>
       <function_metrics>
           <complexity>10</complexity>
-          <statements>disable</statements>
+          <statements>5</statements>
           <maximum_depth>disable</maximum_depth>
           <calls>disable</calls>
       </function_metrics>
