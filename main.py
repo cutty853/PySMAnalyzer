@@ -10,6 +10,7 @@
 import argparse
 from utils import center, colourizer
 import analyzer
+import os
 
 
 FRAME_SIZE = 70
@@ -61,9 +62,9 @@ def main():  # pragma: no cover
         print("-" * FRAME_SIZE)
         parser.print_help()
         sys.exit(1)
-    if options.format not in {"html", "xml"}:
+    if options.format not in {"html", "xml", "str"}:
         import sys
-        print("You must provide a supported format (html or xml)")
+        print("You must provide a supported format (html or xml or str)")
         print("-" * FRAME_SIZE)
         parser.print_help()
         sys.exit(1)
@@ -71,9 +72,15 @@ def main():  # pragma: no cover
     sm_analyzer = analyzer.Analyzer(options.input, options.rules)
     sm_analyzer.load_files()
     sm_analyzer.make_report()
-    sm_analyzer.print_bad_entities()
-    if options.output:
-        sm_analyzer.save_report(options.output, method=options.format)
+    if options.format == "str":
+        sm_analyzer.print_bad_entities()
+    else:
+        print("generating output to the {} format".format(
+            colourizer.good(options.format)
+        ))
+        if options.output:
+            filename = sm_analyzer.save_report(options.output, method=options.format)
+        print("output:", os.path.realpath(filename))
 
 
 if __name__ == "__main__":

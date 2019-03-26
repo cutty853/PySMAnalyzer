@@ -56,9 +56,11 @@ class Analyzer:
         if method == "html":
             with open(HTML_BASE_DIRECTORY + file_name, "w") as html_output:
                 html_output.write(self.report.html())
+                return html_output.name
         elif method == "xml":
             with open(XML_BASE_DIRECTORY + file_name, "w") as xml_output:
                 xml_output.write(self.report.xml())
+                return xml_output.name
         else:
             raise ValueError("method must be html or xml")
 
