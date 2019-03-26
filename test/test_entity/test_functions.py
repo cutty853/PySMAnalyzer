@@ -91,7 +91,7 @@ class TestFunction(unittest.TestCase):
 
         self.test_func.load_default_rules(self.rules_tree)
         self.assertEqual(self.test_func.rules.complexity, 10)
-        self.assertEqual(self.test_func.rules.statements, "disable")
+        self.assertEqual(self.test_func.rules.statements, 5)
         self.assertEqual(self.test_func.rules.maximum_depth, "disable")
         self.assertEqual(self.test_func.rules.calls, "disable")
 
@@ -106,14 +106,14 @@ class TestFunction(unittest.TestCase):
         )
         no_rules_func.load_specific_rules(self.rules_tree)
         self.assertEqual(no_rules_func.rules.complexity, 10)
-        self.assertEqual(no_rules_func.rules.statements, "disable")
+        self.assertEqual(no_rules_func.rules.statements, 5)
         self.assertEqual(no_rules_func.rules.maximum_depth, "disable")
         self.assertEqual(no_rules_func.rules.calls, "disable")
 
         # We don't pre-load the default rules, load_specific_rules will do it
         self.test_func.load_specific_rules(self.rules_tree)
         self.assertEqual(self.test_func.rules.complexity, 5)
-        self.assertEqual(self.test_func.rules.statements, "disable")
+        self.assertEqual(self.test_func.rules.statements, 5)
         self.assertEqual(self.test_func.rules.maximum_depth, "disable")
         self.assertEqual(self.test_func.rules.calls, "disable")
 

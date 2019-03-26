@@ -26,8 +26,8 @@ class TestHTMLReport(unittest.TestCase):
     def test_convert(self):
         """ test for the convert methods """
         self.html_reporter.add_file_section("banane.c")
-        self.html_reporter.add_file("banane.c")
-        self.html_reporter.add_function("banane.c", "my_func")
+        self.html_reporter.add_file("banane.c", ["M3"])
+        self.html_reporter.add_function("banane.c", "my_func", ["complexity", "statements"])
 
         with open("test/test_writer/convert_result.html", "r") as expected_result:
             self.assertEqual(
@@ -37,7 +37,7 @@ class TestHTMLReport(unittest.TestCase):
 
     def test_add_file(self):
         """ test for the add_file methods """
-        self.html_reporter.add_file("banane.c")
+        self.html_reporter.add_file("banane.c", ["M3"])
         new_bad_file = self.html_reporter.html_tree.find(
             htmlreport.BAD_FILES_SECTION_PATH
         )[0]
@@ -71,11 +71,11 @@ class TestHTMLReport(unittest.TestCase):
         """ test for the add_function methods """
         # We must add the section before !
         with self.assertRaises(htmlreport.NoSection):
-            self.html_reporter.add_function("banane.c", "my_func")
+            self.html_reporter.add_function("banane.c", "my_func", ["complexity"])
 
         # Adding the section and then the function
         self.html_reporter.add_file_section("banane.c")
-        self.html_reporter.add_function("banane.c", "my_func")
+        self.html_reporter.add_function("banane.c", "my_func", ["complexity"])
 
         # Getting the new function tree
         new_function = self.html_reporter.html_tree.find(
